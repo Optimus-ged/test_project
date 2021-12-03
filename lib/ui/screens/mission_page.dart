@@ -170,18 +170,21 @@ class MissionPage extends StatelessWidget {
   }
 
   Widget _buildItemList() {
-    return Column(
-      children: [
-        _buildMissionItem(),
-        _buildMissionItem(),
-        _buildMissionItem(),
-        // _buildMissionItem(),
-        // _buildMissionItem(),
-        // _buildMissionItem(),
-        // _buildMissionItem(),
-        // _buildMissionItem(),
-        // _buildMissionItem(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        children: [
+          _buildMissionItem(),
+          _buildMissionItem(),
+          _buildMissionItem(),
+          // _buildMissionItem(),
+          // _buildMissionItem(),
+          // _buildMissionItem(),
+          // _buildMissionItem(),
+          // _buildMissionItem(),
+          // _buildMissionItem(),
+        ],
+      ),
     );
   }
 }

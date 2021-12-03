@@ -14,7 +14,6 @@ class _PrincipalState extends State<Principal> {
   // GetAllEnterpriseBloc _getAllEnterpriseBloc;
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen;
-  
 
   @override
   void initState() {
@@ -22,10 +21,8 @@ class _PrincipalState extends State<Principal> {
     //   ..add(LoadEnterprises(userId: widget.contribuable.id));
 
     // tz.initializeTimeZones();
-    
-    currentScreen = MissionPage(
-      
-    );
+
+    currentScreen = MissionPage();
     super.initState();
   }
 
@@ -61,15 +58,12 @@ class _PrincipalState extends State<Principal> {
                         SizedBox(height: 10),
                         Icon(
                           Icons.home_outlined,
-                          color:
-                              currentTap == 0 ? Color(0xffAA000A) : Colors.grey,
+                          color: currentTap == 0 ? Colors.blue : Colors.grey,
                         ),
                         Text(
                           'Accueil',
                           style: TextStyle(
-                            color: currentTap == 0
-                                ? Color(0xffAA000A)
-                                : Colors.grey,
+                            color: currentTap == 0 ? Colors.blue : Colors.grey,
                           ),
                         )
                       ],
@@ -94,15 +88,12 @@ class _PrincipalState extends State<Principal> {
                         SizedBox(height: 10),
                         Icon(
                           Icons.countertops_outlined,
-                          color:
-                              currentTap == 1 ? Color(0xffAA000A) : Colors.grey,
+                          color: currentTap == 1 ? Colors.blue : Colors.grey,
                         ),
                         Text(
                           'Entrepri..',
                           style: TextStyle(
-                            color: currentTap == 1
-                                ? Color(0xffAA000A)
-                                : Colors.grey,
+                            color: currentTap == 1 ? Colors.blue : Colors.grey,
                           ),
                         )
                       ],
@@ -119,7 +110,7 @@ class _PrincipalState extends State<Principal> {
                     onPressed: () {
                       setState(() {
                         currentScreen = MissionPage();
-                        currentTap = 3;
+                        currentTap = 2;
                       });
                     },
                     child: Column(
@@ -127,15 +118,12 @@ class _PrincipalState extends State<Principal> {
                         SizedBox(height: 10),
                         Icon(
                           Icons.notifications,
-                          color:
-                              currentTap == 3 ? Color(0xffAA000A) : Colors.grey,
+                          color: currentTap == 2 ? Colors.blue : Colors.grey,
                         ),
                         Text(
                           'Notifs',
                           style: TextStyle(
-                            color: currentTap == 3
-                                ? Color(0xffAA000A)
-                                : Colors.grey,
+                            color: currentTap == 2 ? Colors.blue : Colors.grey,
                           ),
                         )
                       ],
@@ -150,7 +138,7 @@ class _PrincipalState extends State<Principal> {
                     onPressed: () {
                       setState(() {
                         currentScreen = MissionPage();
-                        currentTap = 2;
+                        currentTap = 3;
                       });
                     },
                     child: Column(
@@ -158,15 +146,12 @@ class _PrincipalState extends State<Principal> {
                         SizedBox(height: 10),
                         Icon(
                           Icons.face,
-                          color:
-                              currentTap == 2 ? Color(0xffAA000A) : Colors.grey,
+                          color: currentTap == 3 ? Colors.blue : Colors.grey,
                         ),
                         Text(
                           'Profile',
                           style: TextStyle(
-                            color: currentTap == 2
-                                ? Color(0xffAA000A)
-                                : Colors.grey,
+                            color: currentTap == 3 ? Colors.blue : Colors.grey,
                           ),
                         )
                       ],
