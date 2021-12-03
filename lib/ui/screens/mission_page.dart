@@ -1,3 +1,4 @@
+import 'package:ackaton_manage/ui/screens/mission_details.dart';
 import 'package:flutter/material.dart';
 
 class MissionPage extends StatelessWidget {
@@ -12,7 +13,7 @@ class MissionPage extends StatelessWidget {
           child: Column(
             children: [
               _buildSearch(context),
-              _buildItemList(),
+              _buildItemList(context),
             ],
           ),
         ),
@@ -94,7 +95,7 @@ class MissionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildMissionItem() {
+  Widget _buildMissionItem({VoidCallback ontap}) {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
       child: Row(
@@ -137,7 +138,7 @@ class MissionPage extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
-                        color: Colors.black54,
+                        color: Colors.black87,
                       ),
                     ),
                     SizedBox(height: 15),
@@ -148,15 +149,18 @@ class MissionPage extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                      child: Text(
-                        'visualiser',
-                        style: TextStyle(fontSize: 12, color: Colors.white),
+                    GestureDetector(
+                      onTap: ontap,
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                        child: Text(
+                          'visualiser',
+                          style: TextStyle(fontSize: 12, color: Colors.white),
+                        ),
                       ),
                     )
                   ],
@@ -169,12 +173,18 @@ class MissionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildItemList() {
+  Widget _buildItemList(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         children: [
-          _buildMissionItem(),
+          _buildMissionItem(
+            ontap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => MissionDetails(),
+              ),
+            ),
+          ),
           _buildMissionItem(),
           _buildMissionItem(),
           // _buildMissionItem(),
