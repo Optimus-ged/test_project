@@ -1,4 +1,4 @@
-import 'package:ackaton_manage/ui/login_page.dart';
+import 'package:ackaton_manage/ui/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
