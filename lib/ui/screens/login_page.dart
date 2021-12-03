@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'principal.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
 
@@ -172,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                                         onTap: ()=> Navigator.of(context).push(
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                MissionPage(),
+                                                Principal(),
                                           ),
                                         ),
                                         child: Text(
