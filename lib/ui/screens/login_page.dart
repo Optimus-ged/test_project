@@ -3,6 +3,7 @@ import 'package:ackaton_manage/bloc/login_bloc/login_event.dart';
 import 'package:ackaton_manage/bloc/login_bloc/login_state.dart';
 import 'package:ackaton_manage/constants/theme.dart';
 import 'package:ackaton_manage/models/login/login_submit.dart';
+import 'package:ackaton_manage/ui/screens/mission_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -18,11 +19,10 @@ class _LoginPageState extends State<LoginPage> {
   bool isLoading = false;
   LoginBloc _loginBloc;
 
-
   @override
   void initState() {
     _loginBloc = BlocProvider.of<LoginBloc>(context);
-    
+
     _usernameCtrl = TextEditingController(text: 'Yala ged');
     _passwordCtrl = TextEditingController(text: 'yala');
     super.initState();
@@ -75,14 +75,14 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                              //       return 
-                              Text(
-                                'Hey !\nConnectez vous',
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
+                        //       return
+                        Text(
+                          'Hey !\nConnectez vous',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                         // BlocBuilder<SignupBloc, SignupState>(
                         //   bloc: _signupBloc,
                         //   builder: (context, state) {
@@ -168,7 +168,13 @@ class _LoginPageState extends State<LoginPage> {
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: InkWell(
-                                        onTap: () => _loginBtnPressed(),
+                                        // onTap: () => _loginBtnPressed(),
+                                        onTap: ()=> Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                MissionPage(),
+                                          ),
+                                        ),
                                         child: Text(
                                           'Connection',
                                           style: TextStyle(

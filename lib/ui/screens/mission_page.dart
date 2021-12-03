@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'mission_process.dart';
 
 class MissionPage extends StatelessWidget {
