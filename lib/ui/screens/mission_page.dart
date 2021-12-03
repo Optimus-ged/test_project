@@ -136,7 +136,7 @@ class MissionPage extends StatelessWidget {
                     Text(
                       'ISIG Goma',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                        // fontWeight: FontWeight.bold,
                         fontSize: 16,
                         color: Colors.black87,
                       ),
