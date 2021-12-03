@@ -106,6 +106,26 @@ class _MissionDetailsState extends State<MissionDetails> {
   Widget _buildAppBar() {
     return Container(
       height: 60,
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        children: [
+          Container(
+            padding: EdgeInsets.all(10),
+            child: RotationTransition(
+              turns: AlwaysStoppedAnimation(180 / 360),
+              child: Icon(Icons.arrow_right_alt),
+            ),
+          ),
+          Center(
+            child: Material(
+              color: Colors.transparent,
+              child: Center(
+                child: Text('Details'),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
