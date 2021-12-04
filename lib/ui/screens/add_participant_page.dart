@@ -1,4 +1,3 @@
-import 'package:ackaton_manage/constants/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io' as io;
@@ -84,9 +83,9 @@ class _AddParticipantState extends State<AddParticipant> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _customAvatar(),
-                      _loginInput(color: Colors.white, hint: 'Nom'),
-                      _loginInput(color: Colors.white, hint: 'Nom'),
-                      _loginInput(color: Colors.white, hint: 'Nom')
+                      _loginInput(color: Colors.blue[50], hint: 'Nom'),
+                      _loginInput(color: Colors.blue[50], hint: 'tache'),
+                      _loginInput(color: Colors.blue[50], hint: 'role')
                     ],
                   ),
                 ),
@@ -102,6 +101,7 @@ class _AddParticipantState extends State<AddParticipant> {
   _customAvatar() {
     return Container(
       // color: Colors.green,
+      margin: EdgeInsets.only(bottom: 40, top: 20),
       child: Align(
         alignment: Alignment.center,
         child: Container(
@@ -119,7 +119,7 @@ class _AddParticipantState extends State<AddParticipant> {
                           borderRadius: BorderRadius.circular(40),
                           color: Colors.blue[50],
                           border: Border.all(
-                            color: CustomTheme.greyColor,
+                            color: Colors.blue[200],
                             width: 0.1,
                           ),
                           image: DecorationImage(
@@ -174,7 +174,7 @@ class _AddParticipantState extends State<AddParticipant> {
       VoidCallback onTap,
       TextEditingController controller}) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
       child: Container(
         height: 55,
         alignment: Alignment.center,

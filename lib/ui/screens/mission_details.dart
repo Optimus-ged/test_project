@@ -109,7 +109,15 @@ class _MissionDetailsState extends State<MissionDetails> {
               ),
             ),
           ),
-          Text('Details')
+          Text('Details'),
+          Spacer(),
+          GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Text('Tâches'),
+            ),
+          ),
         ],
       ),
     );
