@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'add_task_page.dart';
+
 class TasksPage extends StatefulWidget {
   const TasksPage({Key key}) : super(key: key);
 
@@ -31,7 +33,11 @@ class _TasksPageState extends State<TasksPage> {
           children: [
             FloatingActionButton(
               tooltip: 'Ajouter une tache',
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AddTaskPage(),
+                ),
+              ),
               child: Icon(
                 Icons.add_chart,
               ),
