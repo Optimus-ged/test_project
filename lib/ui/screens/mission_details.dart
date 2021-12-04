@@ -21,7 +21,7 @@ class _MissionDetailsState extends State<MissionDetails> {
               color: Colors.white,
             ),
             _buildAppBar(),
-            _buildContent()
+            _buildContent(),
           ],
         ),
       ),
@@ -151,13 +151,15 @@ class _MissionDetailsState extends State<MissionDetails> {
                   TextSpan(
                     text: ' 01/01/2021',
                     style: TextStyle(
-                        color: Colors.green, fontWeight: FontWeight.w600),
+                      color: Colors.green,
+                      // fontWeight: FontWeight.w600,
+                    ),
                   ),
                   TextSpan(text: ' au'),
                   TextSpan(
                     text: ' 01/01/2022',
                     style: TextStyle(
-                      fontWeight: FontWeight.w600,
+                      // fontWeight: FontWeight.w600,
                       color: Colors.red,
                     ),
                   ),
@@ -168,6 +170,8 @@ class _MissionDetailsState extends State<MissionDetails> {
             _buildItem(title: 'Nombre de jour', number: '365'),
             _buildItem(title: 'Nombre des taches', number: '20'),
             _buildItem(title: 'Nombre d\'intervenants', number: 5),
+            Spacer(),
+            _buildButton(),
           ],
         ),
       ),
@@ -206,6 +210,43 @@ class _MissionDetailsState extends State<MissionDetails> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildButton() {
+    return Container(
+      padding: EdgeInsets.only(bottom: 20, left: 20, right: 20),
+      alignment: Alignment.bottomCenter,
+      child: Material(
+        elevation: 4,
+        color: Colors.grey[400],
+        borderRadius: BorderRadius.circular(30),
+        child: Container(
+          height: 50,
+          width: MediaQuery.of(context).size.width,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            // color: CustomTheme.redColor,
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: InkWell(
+            // onTap: () => _loginBtnPressed(),
+            onTap: () {},
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.add, color: Colors.white),
+                SizedBox(width: 5),
+                Text(
+                  'Ajouter un participant',
+                  style: TextStyle(color: Colors.white, fontSize: 15),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

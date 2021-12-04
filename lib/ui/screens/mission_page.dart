@@ -104,15 +104,15 @@ class MissionPage extends StatelessWidget {
             height: 150,
             width: 100,
             decoration: BoxDecoration(
-              color: Colors.amber,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(2),
                 bottomLeft: Radius.circular(2),
                 bottomRight: Radius.circular(2),
               ),
               image: DecorationImage(
-                  image: AssetImage('assets/images/paysage.jpg'),
-                  fit: BoxFit.cover),
+                image: AssetImage('assets/images/paysage.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Expanded(
