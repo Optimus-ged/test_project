@@ -24,6 +24,21 @@ class _TasksPageState extends State<TasksPage> {
           ],
         ),
       ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(right: 15, bottom: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              tooltip: 'Ajouter une tache',
+              onPressed: () {},
+              child: Icon(
+                Icons.add_chart,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -33,7 +48,6 @@ class _TasksPageState extends State<TasksPage> {
       padding: EdgeInsets.only(left: 5),
       child: Row(
         children: [
-          
           GestureDetector(
             onTap: () => Navigator.of(context).pop(),
             child: Container(
@@ -44,7 +58,7 @@ class _TasksPageState extends State<TasksPage> {
               ),
             ),
           ),
-          Text('Ajouter une tâches')
+          Text('Tâches')
         ],
       ),
     );
@@ -81,7 +95,7 @@ class _TasksPageState extends State<TasksPage> {
                 ),
               ),
             ),
-            _buildButton(context),
+            // _buildButton(context),
           ],
         ),
       ),
@@ -90,7 +104,7 @@ class _TasksPageState extends State<TasksPage> {
 
   Widget _buildButton(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom: 0, left: 20, right: 20),
+      // padding: EdgeInsets.only(bottom: 0, left: 20, right: 20),
       alignment: Alignment.bottomCenter,
       child: Material(
         elevation: 4,

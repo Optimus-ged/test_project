@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BuildStepper extends StatefulWidget {
-  const BuildStepper({ Key key }) : super(key: key);
+  const BuildStepper({Key key}) : super(key: key);
 
   @override
   _BuildStepperState createState() => _BuildStepperState();
@@ -73,7 +73,7 @@ class _BuildStepperState extends State<BuildStepper> {
                 ),
                 isActive: _currentStep >= 0,
                 state:
-                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
+                    _currentStep >= 3 ? StepState.complete : StepState.disabled,
               ),
               Step(
                 title: Text(
@@ -86,7 +86,7 @@ class _BuildStepperState extends State<BuildStepper> {
                 ),
                 isActive: _currentStep >= 0,
                 state:
-                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
+                    _currentStep >= 4 ? StepState.complete : StepState.disabled,
               ),
               Step(
                 title: Text(
@@ -99,16 +99,72 @@ class _BuildStepperState extends State<BuildStepper> {
                 ),
                 isActive: _currentStep >= 0,
                 state:
-                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
+                    _currentStep >= 5 ? StepState.complete : StepState.disabled,
               ),
             ],
           ),
         ],
       ),
     );
+
+    // return Container(
+    //     child: Stepper(
+    //   steps: [
+    //     Step(
+    //         title: Text("Task-1"),
+    //         content: Text(""),
+    //         subtitle: Text("Compled"),
+    //         isActive: true,
+    //         state: StepState.complete),
+    //     Step(
+    //         title: Text("Task-2"),
+    //         content: Text(""),
+    //         subtitle: Text("Compled"),
+    //         isActive: true,
+    //         state: StepState.complete),
+    //     Step(
+    //         title: Text("Task-3"),
+    //         content: Text(""),
+    //         subtitle: Text("Compled"),
+    //         isActive: true,
+    //         state: StepState.disabled),
+    //     Step(
+    //         title: Text("Task-4"),
+    //         content: Text(""),
+    //         subtitle: Text("Compled"),
+    //         isActive: true,
+    //         state: StepState.editing),
+    //     Step(
+    //         title: Text("Task-5"),
+    //         content: Text(""),
+    //         subtitle: Text("Compled"),
+    //         isActive: true,
+    //         state: StepState.error),
+    //     Step(
+    //         title: Text("Task-6"),
+    //         content: Text(""),
+    //         subtitle: Text("Compled"),
+    //         isActive: true,
+    //         state: StepState.complete),
+    //     Step(
+    //         title: Text("Task-7"),
+    //         content: Text(""),
+    //         subtitle: Text("Compled"),
+    //         isActive: true,
+    //         state: StepState.complete),
+    //   ],
+    //   currentStep: _index,
+    //   onStepTapped: (index) {
+    //     setState(() {
+    //       _index = index;
+    //     });
+    //   },
+    //   controlsBuilder: (BuildContext context,
+    //           {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
+    //       Container(),
+    // ));
   }
 
-  
   tapped(int step) {
     setState(() {
       _currentStep = step;
@@ -116,11 +172,10 @@ class _BuildStepperState extends State<BuildStepper> {
   }
 
   void continued() {
-    if (_currentStep < 2) setState(() => _currentStep += 1);
+    if (_currentStep < 5) setState(() => _currentStep += 1);
   }
 
   void canceled() {
     if (_currentStep > 0) setState(() => _currentStep -= 1);
   }
-
 }

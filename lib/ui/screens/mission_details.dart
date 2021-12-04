@@ -13,7 +13,6 @@ class MissionDetails extends StatefulWidget {
 }
 
 class _MissionDetailsState extends State<MissionDetails> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +123,7 @@ class _MissionDetailsState extends State<MissionDetails> {
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Row(
                 children: [
-                  Icon(Icons.add, size: 18),
+                  Icon(Icons.topic_rounded, size: 18),
                   Text('Tâches'),
                 ],
               ),
@@ -291,5 +290,4 @@ class _MissionDetailsState extends State<MissionDetails> {
       ),
     );
   }
-
 }
