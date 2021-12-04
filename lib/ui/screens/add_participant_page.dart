@@ -1,7 +1,24 @@
+import 'package:ackaton_manage/constants/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io' as io;
 
-class AddParticipant extends StatelessWidget {
+class AddParticipant extends StatefulWidget {
   const AddParticipant({Key key}) : super(key: key);
+
+  @override
+  _AddParticipantState createState() => _AddParticipantState();
+}
+
+class _AddParticipantState extends State<AddParticipant> {
+  io.File _image;
+  Future getImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = io.File(pickedFile.path);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,23 +77,140 @@ class AddParticipant extends StatelessWidget {
             Expanded(
               child: Container(
                 width: MediaQuery.of(context).size.width - 40,
-                color: Colors.amber,
-                padding: EdgeInsets.only(bottom: 20),
+                // color: Colors.amber,
+                padding: EdgeInsets.only(bottom: 20, top: 20),
                 child: SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        height: 100,
-                        width: 100,
-                        color: Colors.green,
-                      ),
-                      
+                      _customAvatar(),
+                      _loginInput(color: Colors.white, hint: 'Nom'),
+                      _loginInput(color: Colors.white, hint: 'Nom'),
+                      _loginInput(color: Colors.white, hint: 'Nom')
                     ],
                   ),
                 ),
               ),
             ),
             _buildButton(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _customAvatar() {
+    return Container(
+      // color: Colors.green,
+      child: Align(
+        alignment: Alignment.center,
+        child: Container(
+          // alignment: Alignment.center,
+          // color: Colors.amber,
+          width: 150,
+          child: Stack(
+            children: [
+              Center(
+                child: _image == null
+                    ? Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Colors.blue[50],
+                          border: Border.all(
+                            color: CustomTheme.greyColor,
+                            width: 0.1,
+                          ),
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/noAvatar.png'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(40),
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.file(_image, fit: BoxFit.cover),
+                        ),
+                      ),
+              ),
+              Positioned(
+                top: 0,
+                right: 15,
+                child: InkWell(
+                  onTap: () => getImage(),
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.add_a_photo,
+                      size: 20,
+                      color: Colors.white60,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _loginInput(
+      {Color color,
+      String hint,
+      bool isPassword = false,
+      bool isLogin = false,
+      VoidCallback onTap,
+      TextEditingController controller}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Container(
+        height: 55,
+        alignment: Alignment.center,
+        padding: EdgeInsets.only(left: 15, right: !isPassword ? 15 : 0),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: controller,
+                obscureText: isLogin,
+                style: TextStyle(fontWeight: FontWeight.w600),
+                decoration: InputDecoration.collapsed(
+                  hintText: '$hint',
+                  hintStyle: TextStyle(
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+            ),
+            if (isPassword)
+              InkWell(
+                onTap: onTap,
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Icon(
+                      Icons.remove_red_eye_sharp,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              )
           ],
         ),
       ),
