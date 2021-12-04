@@ -1,4 +1,5 @@
 import 'package:ackaton_manage/constants/theme.dart';
+import 'package:ackaton_manage/ui/screens/participant_page.dart';
 import 'package:ackaton_manage/ui/widgets/stepper_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -112,11 +113,11 @@ class _MissionDetailsState extends State<MissionDetails> {
             ),
           ),
           Text('Details'),
-          Spacer(),
+           Spacer(),
           GestureDetector(
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => TasksPage(),
+                builder: (context) => ParticipantPage(),
               ),
             ),
             child: Container(
@@ -166,7 +167,7 @@ class _MissionDetailsState extends State<MissionDetails> {
           children: [
             Container(
               // color: Colors.red,
-              height: MediaQuery.of(context).size.height - 154,
+              height: MediaQuery.of(context).size.height - 84,
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -223,8 +224,8 @@ class _MissionDetailsState extends State<MissionDetails> {
                 ),
               ),
             ),
-            Spacer(),
-            _buildButton(),
+            // Spacer(),
+            // _buildButton(),
           ],
         ),
       ),
