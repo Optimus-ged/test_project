@@ -123,6 +123,23 @@ class _MissionDetailsState extends State<MissionDetails> {
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Row(
                 children: [
+                  Icon(Icons.people_rounded, size: 18),
+                  Text('Participants'),
+                ],
+              ),
+            ),
+          ),
+          Spacer(),
+          GestureDetector(
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => TasksPage(),
+              ),
+            ),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Row(
+                children: [
                   Icon(Icons.topic_rounded, size: 18),
                   Text('Tâches'),
                 ],
