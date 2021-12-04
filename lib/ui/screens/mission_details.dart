@@ -145,59 +145,68 @@ class _MissionDetailsState extends State<MissionDetails> {
             top: Radius.circular(20),
           ),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 20),
-              _buildMissionItem(),
-              SizedBox(height: 20),
-              Text(
-                'A propos',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-              SizedBox(height: 5),
-              RichText(
-                text: TextSpan(
-                  text:
-                      'Lorem ipsum dolor sit amet consectetur adipisicing elit Iure nihil magnam accusamus, iusto inventore molestias ipsum dolor sit amet consectetur adipisicing elit. Iurenihil magnam accusamus, iusto inventore molestias cette mission va va du',
-                  style: TextStyle(
-                      fontSize: 11,
-                      fontFamily: '${CustomTheme.secondaryFont}',
-                      color: Colors.black),
-                  children: const <TextSpan>[
-                    TextSpan(
-                      text: ' 01/01/2021',
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              // color: Colors.red,
+              height: MediaQuery.of(context).size.height - 154,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 20),
+                    _buildMissionItem(),
+                    SizedBox(height: 20),
+                    Text(
+                      'A propos',
                       style: TextStyle(
-                        color: Colors.green,
-                        // fontWeight: FontWeight.w600,
+                        fontSize: 12,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                        decoration: TextDecoration.underline,
                       ),
                     ),
-                    TextSpan(text: ' au'),
-                    TextSpan(
-                      text: ' 01/01/2022',
-                      style: TextStyle(
-                        // fontWeight: FontWeight.w600,
-                        color: Colors.red,
+                    SizedBox(height: 5),
+                    RichText(
+                      text: TextSpan(
+                        text:
+                            'Lorem ipsum dolor sit amet consectetur adipisicing elit Iure nihil magnam accusamus, iusto inventore molestias ipsum dolor sit amet consectetur adipisicing elit. Iurenihil magnam accusamus, iusto inventore molestias cette mission va va du',
+                        style: TextStyle(
+                            fontSize: 11,
+                            fontFamily: '${CustomTheme.secondaryFont}',
+                            color: Colors.black),
+                        children: const <TextSpan>[
+                          TextSpan(
+                            text: ' 01/01/2021',
+                            style: TextStyle(
+                              color: Colors.green,
+                              // fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          TextSpan(text: ' au'),
+                          TextSpan(
+                            text: ' 01/01/2022',
+                            style: TextStyle(
+                              // fontWeight: FontWeight.w600,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                    SizedBox(height: 10),
+                    _buildItem(title: 'Nombre de jour', number: '365'),
+                    _buildItem(title: 'Nombre des taches', number: '20'),
+                    _buildItem(title: 'Nombre d\'intervenants', number: 5),
+                    _buildStepper(),
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              _buildItem(title: 'Nombre de jour', number: '365'),
-              _buildItem(title: 'Nombre des taches', number: '20'),
-              _buildItem(title: 'Nombre d\'intervenants', number: 5),
-              _buildStepper(),
-              // Spacer(),
-              _buildButton(),
-            ],
-          ),
+            ),
+            Spacer(),
+            _buildButton(),
+          ],
         ),
       ),
     );
@@ -292,6 +301,7 @@ class _MissionDetailsState extends State<MissionDetails> {
             onStepContinue: continued,
             onStepCancel: canceled,
             steps: <Step>[
+              
               Step(
                 title: Text(
                   "Preparation",
@@ -331,6 +341,45 @@ class _MissionDetailsState extends State<MissionDetails> {
                 state:
                     _currentStep >= 2 ? StepState.complete : StepState.disabled,
               ),
+              Step(
+                title: Text(
+                  "Analyse",
+                  style: TextStyle(fontSize: 12),
+                ),
+                content: Text(
+                  'Le projet est en cours d\'analyse',
+                  style: TextStyle(fontSize: 12),
+                ),
+                isActive: _currentStep >= 0,
+                state:
+                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
+              ),
+               Step(
+                title: Text(
+                  "Rapport",
+                  style: TextStyle(fontSize: 12),
+                ),
+                content: Text(
+                  'Rapport en cours d\'edition',
+                  style: TextStyle(fontSize: 12),
+                ),
+                isActive: _currentStep >= 0,
+                state:
+                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
+              ),
+               Step(
+                title: Text(
+                  "Presentation",
+                  style: TextStyle(fontSize: 12),
+                ),
+                content: Text(
+                  'Presentation en cours',
+                  style: TextStyle(fontSize: 12),
+                ),
+                isActive: _currentStep >= 0,
+                state:
+                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
+              ),
             ],
           ),
         ],
@@ -350,5 +399,18 @@ class _MissionDetailsState extends State<MissionDetails> {
 
   void canceled() {
     if (_currentStep > 0) setState(() => _currentStep -= 1);
+  }
+
+  Step _buildStepWwidget({
+    @required Widget titleWidget,
+    @required Widget contentWidget,
+    @required int level ,
+  }) {
+    return Step(
+      title: titleWidget,
+      content: contentWidget,
+      isActive: _currentStep >= level,
+      state: _currentStep >= 1 ? StepState.complete : StepState.disabled,
+    );
   }
 }
