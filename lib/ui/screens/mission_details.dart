@@ -1,6 +1,8 @@
 import 'package:ackaton_manage/constants/theme.dart';
 import 'package:flutter/material.dart';
 
+import 'add_participant_page.dart';
+
 class MissionDetails extends StatefulWidget {
   const MissionDetails({Key key}) : super(key: key);
 
@@ -233,7 +235,11 @@ class _MissionDetailsState extends State<MissionDetails> {
           ),
           child: InkWell(
             // onTap: () => _loginBtnPressed(),
-            onTap: () {},
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => AddParticipant(),
+              ),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
