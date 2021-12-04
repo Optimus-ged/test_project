@@ -1,4 +1,5 @@
 import 'package:ackaton_manage/constants/theme.dart';
+import 'package:ackaton_manage/ui/widgets/stepper_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'add_participant_page.dart';
@@ -12,8 +13,7 @@ class MissionDetails extends StatefulWidget {
 }
 
 class _MissionDetailsState extends State<MissionDetails> {
-  int _currentStep = 0;
-  StepperType _stepperType = StepperType.vertical;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,7 +138,7 @@ class _MissionDetailsState extends State<MissionDetails> {
   Widget _buildContent() {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        // padding: EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(
@@ -152,55 +152,58 @@ class _MissionDetailsState extends State<MissionDetails> {
               // color: Colors.red,
               height: MediaQuery.of(context).size.height - 154,
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 20),
-                    _buildMissionItem(),
-                    SizedBox(height: 20),
-                    Text(
-                      'A propos',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    RichText(
-                      text: TextSpan(
-                        text:
-                            'Lorem ipsum dolor sit amet consectetur adipisicing elit Iure nihil magnam accusamus, iusto inventore molestias ipsum dolor sit amet consectetur adipisicing elit. Iurenihil magnam accusamus, iusto inventore molestias cette mission va va du',
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 20),
+                      _buildMissionItem(),
+                      SizedBox(height: 20),
+                      Text(
+                        'A propos',
                         style: TextStyle(
-                            fontSize: 11,
-                            fontFamily: '${CustomTheme.secondaryFont}',
-                            color: Colors.black),
-                        children: const <TextSpan>[
-                          TextSpan(
-                            text: ' 01/01/2021',
-                            style: TextStyle(
-                              color: Colors.green,
-                              // fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          TextSpan(text: ' au'),
-                          TextSpan(
-                            text: ' 01/01/2022',
-                            style: TextStyle(
-                              // fontWeight: FontWeight.w600,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ],
+                          fontSize: 12,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    _buildItem(title: 'Nombre de jour', number: '365'),
-                    _buildItem(title: 'Nombre des taches', number: '20'),
-                    _buildItem(title: 'Nombre d\'intervenants', number: 5),
-                    _buildStepper(),
-                  ],
+                      SizedBox(height: 5),
+                      RichText(
+                        text: TextSpan(
+                          text:
+                              'Lorem ipsum dolor sit amet consectetur adipisicing elit Iure nihil magnam accusamus, iusto inventore molestias ipsum dolor sit amet consectetur adipisicing elit. Iurenihil magnam accusamus, iusto inventore molestias cette mission va va du',
+                          style: TextStyle(
+                              fontSize: 11,
+                              fontFamily: '${CustomTheme.secondaryFont}',
+                              color: Colors.black),
+                          children: const <TextSpan>[
+                            TextSpan(
+                              text: ' 01/01/2021',
+                              style: TextStyle(
+                                color: Colors.green,
+                                // fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            TextSpan(text: ' au'),
+                            TextSpan(
+                              text: ' 01/01/2022',
+                              style: TextStyle(
+                                // fontWeight: FontWeight.w600,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      _buildItem(title: 'Nombre de jour', number: '365'),
+                      _buildItem(title: 'Nombre des taches', number: '20'),
+                      _buildItem(title: 'Nombre d\'intervenants', number: 5),
+                      BuildStepper(),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -289,128 +292,4 @@ class _MissionDetailsState extends State<MissionDetails> {
     );
   }
 
-  Widget _buildStepper() {
-    return Container(
-      child: Column(
-        children: [
-          Stepper(
-            type: _stepperType,
-            currentStep: _currentStep,
-            physics: ScrollPhysics(),
-            onStepTapped: (step) => tapped(step),
-            onStepContinue: continued,
-            onStepCancel: canceled,
-            steps: <Step>[
-              
-              Step(
-                title: Text(
-                  "Preparation",
-                  style: TextStyle(fontSize: 12),
-                ),
-                content: Text(
-                  'Le projet est en cours de preparation',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 0 ? StepState.complete : StepState.disabled,
-              ),
-              Step(
-                title: Text(
-                  "Execution",
-                  style: TextStyle(fontSize: 12),
-                ),
-                content: Text(
-                  'Le projet est en cours d\execution',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 1 ? StepState.complete : StepState.disabled,
-              ),
-              Step(
-                title: Text(
-                  "Netoyage",
-                  style: TextStyle(fontSize: 12),
-                ),
-                content: Text(
-                  'Le projet est en cours de netoyage',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
-              ),
-              Step(
-                title: Text(
-                  "Analyse",
-                  style: TextStyle(fontSize: 12),
-                ),
-                content: Text(
-                  'Le projet est en cours d\'analyse',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
-              ),
-               Step(
-                title: Text(
-                  "Rapport",
-                  style: TextStyle(fontSize: 12),
-                ),
-                content: Text(
-                  'Rapport en cours d\'edition',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
-              ),
-               Step(
-                title: Text(
-                  "Presentation",
-                  style: TextStyle(fontSize: 12),
-                ),
-                content: Text(
-                  'Presentation en cours',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  tapped(int step) {
-    setState(() {
-      _currentStep = step;
-    });
-  }
-
-  void continued() {
-    if (_currentStep < 2) setState(() => _currentStep += 1);
-  }
-
-  void canceled() {
-    if (_currentStep > 0) setState(() => _currentStep -= 1);
-  }
-
-  Step _buildStepWwidget({
-    @required Widget titleWidget,
-    @required Widget contentWidget,
-    @required int level ,
-  }) {
-    return Step(
-      title: titleWidget,
-      content: contentWidget,
-      isActive: _currentStep >= level,
-      state: _currentStep >= 1 ? StepState.complete : StepState.disabled,
-    );
-  }
 }
