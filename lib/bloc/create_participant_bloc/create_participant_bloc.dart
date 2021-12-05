@@ -6,9 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'create_participant_events.dart';
 
 
-class LoadParticipantBloc extends Bloc<CreateParticipantEvent, LoadParticipantState> {
+class CreateParticipantBloc extends Bloc<CreateParticipantEvent, LoadParticipantState> {
   get _api => locator.get<DataRepository>();
-  LoadParticipantBloc() : super(LoadParticipantInitial());
+  CreateParticipantBloc() : super(LoadParticipantInitial());
 
   @override
   Stream<LoadParticipantState> mapEventToState(

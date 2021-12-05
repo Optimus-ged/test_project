@@ -6,9 +6,9 @@ import 'create_task_events.dart';
 import 'create_task_state.dart';
 
 
-class LoadTaskBloc extends Bloc<CreateTaskEvent, CreateTaskState> {
+class CreateTaskBloc extends Bloc<CreateTaskEvent, CreateTaskState> {
   get _api => locator.get<DataRepository>();
-  LoadTaskBloc() : super(CreateTaskInitial());
+  CreateTaskBloc() : super(CreateTaskInitial());
 
   @override
   Stream<CreateTaskState> mapEventToState(
