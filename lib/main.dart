@@ -28,7 +28,9 @@ void main() async {
           providers: [
             BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
             BlocProvider<CreateTaskBloc>(create: (context) => CreateTaskBloc()),
-            BlocProvider<CreateParticipantBloc>(create: (context) => CreateParticipantBloc()),
+            BlocProvider<CreateParticipantBloc>(
+              create: (context) => CreateParticipantBloc(),
+            ),
             BlocProvider<LoadMissionBloc>(
               create: (context) => LoadMissionBloc(),
             ),

@@ -12,8 +12,3 @@ class CustomTheme {
   static const Color greyColor = Color(0xffE0E1E2);
 }
 
-class GlobalData {
-  // static Contribuable contribuable = Contribuable();
-  // static List<Widget> entreprises = [];
-  // static String user = '';
-}
