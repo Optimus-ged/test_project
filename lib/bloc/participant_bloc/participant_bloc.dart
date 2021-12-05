@@ -22,8 +22,8 @@ class LoadParticipantBloc extends Bloc<GetParticipantEvent, LoadParticipantState
 
     try {
       yield LoadParticipantInProgress();
-      final Participants = await _api.loadParticipants();
-      if (Participants.status == 200) {
+      final participants = await _api.loadParticipants();
+      if (participants.status == 200) {
         // yield LoadParticipantSuccess(login: login);
 
       } else {

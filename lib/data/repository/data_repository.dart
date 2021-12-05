@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'package:ackaton_manage/data/dio/interceptors.dart';
 import 'package:dio/dio.dart';
 
@@ -66,6 +66,13 @@ class DataRepository {
   // }
 
   // Future<GetAllEnterprisesResponse> getAllMissions(String id) async {
+  //   final result = await _dio.get(
+  //     "/enterprise/all/$id",
+  //   );
+  //   return GetAllEnterprisesResponse.fromJson(result.data);
+  // }
+
+  // Future<GetAllParticipants> loadParticipants(String id) async {
   //   final result = await _dio.get(
   //     "/enterprise/all/$id",
   //   );
