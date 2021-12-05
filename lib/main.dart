@@ -1,3 +1,4 @@
+import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +11,7 @@ import 'package:bloc/bloc.dart';
 void main() async {
   try {
     Bloc.observer = SimpleBlocObserver();
-    
+
     WidgetsFlutterBinding.ensureInitialized();
 
     setup();
@@ -24,6 +25,9 @@ void main() async {
         MultiBlocProvider(
           providers: [
             BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
+            BlocProvider<LoadMissionBloc>(
+              create: (context) => LoadMissionBloc(),
+            ),
           ],
           child: MyApp(),
         ),
