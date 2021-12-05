@@ -1,9 +1,9 @@
 import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
 import 'package:ackaton_manage/bloc/mission_bloc/mission_state.dart';
 import 'package:ackaton_manage/ui/screens/mission_details.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/material.dart';
 
 class MissionPage extends StatefulWidget {
   const MissionPage({Key key}) : super(key: key);
@@ -230,9 +230,7 @@ class _MissionPageState extends State<MissionPage> {
                 _buildMissionItem(),
               ],
             )
-          : Center(
-              child: CircularProgressIndicator(),
-            ),
+          : Center(child: CircularProgressIndicator()),
     );
   }
 }
