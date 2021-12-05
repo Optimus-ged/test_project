@@ -23,7 +23,7 @@ class LoadMissionFailure extends LoadMissionState {
 }
 
 class LoadMissionSuccess extends LoadMissionState {
-  // final LoadMissionSuccess LoadMission;
+  // final MissionsResponse missions;
 
   // const LoadMissionSuccess({@required this.LoadMission});
 

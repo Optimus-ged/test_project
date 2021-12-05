@@ -1,20 +1,66 @@
+import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
+import 'package:ackaton_manage/bloc/mission_bloc/mission_state.dart';
 import 'package:ackaton_manage/ui/screens/mission_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class MissionPage extends StatelessWidget {
+class MissionPage extends StatefulWidget {
   const MissionPage({Key key}) : super(key: key);
+
+  @override
+  _MissionPageState createState() => _MissionPageState();
+}
+
+class _MissionPageState extends State<MissionPage> {
+  LoadMissionBloc _loadMissionBloc;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    _loadMissionBloc = BlocProvider.of<LoadMissionBloc>(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _buildSearch(context),
-              _buildItemList(context),
-            ],
+      body: BlocListener<LoadMissionBloc, LoadMissionState>(
+        bloc: _loadMissionBloc,
+        listener: (context, state) {
+          if (state is LoadMissionInProgress) {
+            setState(() {
+              isLoading = true;
+            });
+          }
+          if (state is LoadMissionSuccess) {
+            setState(() {
+              isLoading = false;
+            });
+            Fluttertoast.showToast(
+              // msg: "${state.enterpriseData}",
+              msg : 'success message',
+              gravity: ToastGravity.TOP,
+              backgroundColor: Colors.black.withOpacity(0.6),
+            );
+          }
+          if (state is LoadMissionFailure) {
+            GlobalData.entreprises.clear();
+            state.enterpriseData.entreprises.forEach((e) {
+              GlobalData.entreprises
+                  .add(_enterpriseItem(context, enterprise: e));
+            });
+          }
+        },
+        child: Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _buildSearch(context),
+                _buildItemList(context),
+              ],
+            ),
           ),
         ),
       ),
