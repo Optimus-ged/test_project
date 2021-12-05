@@ -1,8 +1,8 @@
-import 'package:ackaton_manage/constants/theme.dart';
 import 'package:ackaton_manage/ui/screens/participant_page.dart';
 import 'package:ackaton_manage/ui/widgets/stepper_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'add_affectation_page.dart';
 import 'add_participant_page.dart';
 import 'tasks_page.dart';
 
@@ -124,7 +124,7 @@ class _MissionDetailsState extends State<MissionDetails> {
                 GestureDetector(
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => ParticipantPage(),
+                      builder: (context) => AddAffectation(),
                     ),
                   ),
                   child: Container(

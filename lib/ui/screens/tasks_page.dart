@@ -158,7 +158,7 @@ class _TasksPageState extends State<TasksPage> {
           color: Colors.blue[50], borderRadius: BorderRadius.circular(2)),
       padding: EdgeInsets.symmetric(
         horizontal: 20,
-        vertical: 10,
+        vertical: 20,
       ),
       child: Text('$title'),
     );
