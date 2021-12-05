@@ -12,100 +12,165 @@ class _BuildStepperState extends State<BuildStepper> {
   StepperType _stepperType = StepperType.vertical;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Stepper(
-            type: _stepperType,
-            currentStep: _currentStep,
-            physics: ScrollPhysics(),
-            onStepTapped: (step) => tapped(step),
-            onStepContinue: continued,
-            onStepCancel: canceled,
-            steps: <Step>[
-              Step(
-                title: Text(
-                  "Preparation",
-                  style: TextStyle(fontSize: 12),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          child: Text(
+            'Evolution du projet',
+            style: TextStyle(
+              fontSize: 12,
+            ),
+          ),
+        ),
+        Container(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.verified,
+                      color: Colors.red,
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Preparation',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(2),
+                                  ),
+                                  padding: EdgeInsets.all(4),
+                                  child: Text(
+                                    'Fermée',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                content: Text(
-                  'Le projet est en cours de preparation',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 0 ? StepState.complete : StepState.disabled,
-              ),
-              Step(
-                title: Text(
-                  "Execution",
-                  style: TextStyle(fontSize: 12),
-                ),
-                content: Text(
-                  'Le projet est en cours d\execution',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 1 ? StepState.complete : StepState.disabled,
-              ),
-              Step(
-                title: Text(
-                  "Netoyage",
-                  style: TextStyle(fontSize: 12),
-                ),
-                content: Text(
-                  'Le projet est en cours de netoyage',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 2 ? StepState.complete : StepState.disabled,
-              ),
-              Step(
-                title: Text(
-                  "Analyse",
-                  style: TextStyle(fontSize: 12),
-                ),
-                content: Text(
-                  'Le projet est en cours d\'analyse',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 3 ? StepState.complete : StepState.disabled,
-              ),
-              Step(
-                title: Text(
-                  "Rapport",
-                  style: TextStyle(fontSize: 12),
-                ),
-                content: Text(
-                  'Rapport en cours d\'edition',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 4 ? StepState.complete : StepState.disabled,
-              ),
-              Step(
-                title: Text(
-                  "Presentation",
-                  style: TextStyle(fontSize: 12),
-                ),
-                content: Text(
-                  'Presentation en cours',
-                  style: TextStyle(fontSize: 12),
-                ),
-                isActive: _currentStep >= 0,
-                state:
-                    _currentStep >= 5 ? StepState.complete : StepState.disabled,
-              ),
+              )
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
+    // return Container(
+    //   child: Column(
+    //     children: [
+    //       Stepper(
+    //         type: _stepperType,
+    //         currentStep: _currentStep,
+    //         physics: ScrollPhysics(),
+    //         onStepTapped: (step) => tapped(step),
+    //         onStepContinue: continued,
+    //         onStepCancel: canceled,
+    //         steps: <Step>[
+    //           Step(
+    //             title: Text(
+    //               "Preparation",
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             content: Text(
+    //               'Le projet est en cours de preparation',
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             isActive: _currentStep >= 0,
+    //             state:
+    //                 _currentStep >= 0 ? StepState.complete : StepState.disabled,
+    //           ),
+    //           Step(
+    //             title: Text(
+    //               "Execution",
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             content: Text(
+    //               'Le projet est en cours d\execution',
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             isActive: _currentStep >= 0,
+    //             state:
+    //                 _currentStep >= 1 ? StepState.complete : StepState.disabled,
+    //           ),
+    //           Step(
+    //             title: Text(
+    //               "Netoyage",
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             content: Text(
+    //               'Le projet est en cours de netoyage',
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             isActive: _currentStep >= 0,
+    //             state:
+    //                 _currentStep >= 2 ? StepState.complete : StepState.disabled,
+    //           ),
+    //           Step(
+    //             title: Text(
+    //               "Analyse",
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             content: Text(
+    //               'Le projet est en cours d\'analyse',
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             isActive: _currentStep >= 0,
+    //             state:
+    //                 _currentStep >= 3 ? StepState.complete : StepState.disabled,
+    //           ),
+    //           Step(
+    //             title: Text(
+    //               "Rapport",
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             content: Text(
+    //               'Rapport en cours d\'edition',
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             isActive: _currentStep >= 0,
+    //             state:
+    //                 _currentStep >= 4 ? StepState.complete : StepState.disabled,
+    //           ),
+    //           Step(
+    //             title: Text(
+    //               "Presentation",
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             content: Text(
+    //               'Presentation en cours',
+    //               style: TextStyle(fontSize: 12),
+    //             ),
+    //             isActive: _currentStep >= 0,
+    //             state:
+    //                 _currentStep >= 5 ? StepState.complete : StepState.disabled,
+    //           ),
+    //         ],
+    //       ),
+    //     ],
+    //   ),
+    // );
 
     // return Container(
     //     child: Stepper(

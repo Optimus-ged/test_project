@@ -113,7 +113,7 @@ class _MissionDetailsState extends State<MissionDetails> {
             ),
           ),
           Text('Details'),
-           Spacer(),
+          Spacer(),
           GestureDetector(
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
@@ -176,49 +176,62 @@ class _MissionDetailsState extends State<MissionDetails> {
                     children: [
                       SizedBox(height: 20),
                       _buildMissionItem(),
-                      SizedBox(height: 20),
-                      Text(
-                        'A propos',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      RichText(
-                        text: TextSpan(
-                          text:
-                              'Lorem ipsum dolor sit amet consectetur adipisicing elit Iure nihil magnam accusamus, iusto inventore molestias ipsum dolor sit amet consectetur adipisicing elit. Iurenihil magnam accusamus, iusto inventore molestias cette mission va va du',
-                          style: TextStyle(
-                              fontSize: 11,
-                              fontFamily: '${CustomTheme.secondaryFont}',
-                              color: Colors.black),
-                          children: const <TextSpan>[
-                            TextSpan(
-                              text: ' 01/01/2021',
-                              style: TextStyle(
-                                color: Colors.green,
-                                // fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            TextSpan(text: ' au'),
-                            TextSpan(
-                              text: ' 01/01/2022',
-                              style: TextStyle(
-                                // fontWeight: FontWeight.w600,
-                                color: Colors.red,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // SizedBox(height: 20),
+                      // Text(
+                      //   'A propos',
+                      //   style: TextStyle(
+                      //     fontSize: 12,
+                      //     color: Colors.black,
+                      //     fontWeight: FontWeight.w600,
+                      //     decoration: TextDecoration.underline,
+                      //   ),
+                      // ),
+                      // SizedBox(height: 5),
+                      // RichText(
+                      //   text: TextSpan(
+                      //     text:
+                      //         'Lorem ipsum dolor sit amet consectetur adipisicing elit Iure nihil magnam accusamus, iusto inventore molestias ipsum dolor sit amet consectetur adipisicing elit. Iurenihil magnam accusamus, iusto inventore molestias cette mission va va du',
+                      //     style: TextStyle(
+                      //         fontSize: 11,
+                      //         fontFamily: '${CustomTheme.secondaryFont}',
+                      //         color: Colors.black),
+                      //     children: const <TextSpan>[
+                      //       TextSpan(
+                      //         text: ' 01/01/2021',
+                      //         style: TextStyle(
+                      //           color: Colors.green,
+                      //           // fontWeight: FontWeight.w600,
+                      //         ),
+                      //       ),
+                      //       TextSpan(text: ' au'),
+                      //       TextSpan(
+                      //         text: ' 01/01/2022',
+                      //         style: TextStyle(
+                      //           // fontWeight: FontWeight.w600,
+                      //           color: Colors.red,
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       SizedBox(height: 10),
                       _buildItem(title: 'Nombre de jour', number: '365'),
                       _buildItem(title: 'Nombre des taches', number: '20'),
                       _buildItem(title: 'Nombre d\'intervenants', number: 5),
-                      BuildStepper(),
+                      // BuildStepper(),
+                      Container(
+                        width: MediaQuery.of(context).size.width - 40,
+                        padding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        margin: EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[50],
+                          border: Border(
+                            left: BorderSide(width: 4, color: Colors.blue[50]),
+                          ),
+                        ),
+                        child: BuildStepper()
+                      )
                     ],
                   ),
                 ),

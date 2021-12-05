@@ -187,12 +187,6 @@ class MissionPage extends StatelessWidget {
           ),
           _buildMissionItem(),
           _buildMissionItem(),
-          // _buildMissionItem(),
-          // _buildMissionItem(),
-          // _buildMissionItem(),
-          // _buildMissionItem(),
-          // _buildMissionItem(),
-          // _buildMissionItem(),
         ],
       ),
     );
