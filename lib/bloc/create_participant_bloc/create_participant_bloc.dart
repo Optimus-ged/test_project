@@ -1,17 +1,18 @@
+import 'package:ackaton_manage/bloc/create_participant_bloc/participant_state.dart';
 import 'package:ackaton_manage/data/repository/data_repository.dart';
 import 'package:ackaton_manage/utils/setup_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'Participant_events.dart';
-import 'Participant_state.dart';
+import 'create_participant_events.dart';
 
-class LoadParticipantBloc extends Bloc<GetParticipantEvent, LoadParticipantState> {
+
+class LoadParticipantBloc extends Bloc<CreateParticipantEvent, LoadParticipantState> {
   get _api => locator.get<DataRepository>();
   LoadParticipantBloc() : super(LoadParticipantInitial());
 
   @override
   Stream<LoadParticipantState> mapEventToState(
-      GetParticipantEvent event) async* {
+      CreateParticipantEvent event) async* {
     if (event is LoadParticipant)
       yield* _mapLoadParticipantToState(event);
   }
