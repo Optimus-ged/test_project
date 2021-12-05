@@ -114,39 +114,84 @@ class _MissionDetailsState extends State<MissionDetails> {
           ),
           Text('Details'),
           Spacer(),
-          GestureDetector(
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => ParticipantPage(),
-              ),
+          Container(
+            // color: Colors.blue,
+            padding: EdgeInsets.only(right: 10),
+            width: MediaQuery.of(context).size.width - 170,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ParticipantPage(),
+                    ),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.blue.withOpacity(
+                        0.09,
+                      ),
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    child: Row(
+                      children: [
+                        Icon(Icons.menu_open_rounded, size: 18),
+                        // Text('Participants'),
+                      ],
+                    ),
+                  ),
+                ),
+                // Spacer(),
+                GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ParticipantPage(),
+                    ),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.blue.withOpacity(
+                        0.09,
+                      ),
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    child: Row(
+                      children: [
+                        Icon(Icons.people_rounded, size: 18),
+                        // Text('Participants'),
+                      ],
+                    ),
+                  ),
+                ),
+                // Spacer(),
+                GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => TasksPage(),
+                    ),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.blue.withOpacity(
+                        0.09,
+                      ),
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                    child: Row(
+                      children: [
+                        Icon(Icons.topic_rounded, size: 18),
+                        // Text('Tâches'),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Row(
-                children: [
-                  Icon(Icons.people_rounded, size: 18),
-                  Text('Participants'),
-                ],
-              ),
-            ),
-          ),
-          Spacer(),
-          GestureDetector(
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => TasksPage(),
-              ),
-            ),
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Row(
-                children: [
-                  Icon(Icons.topic_rounded, size: 18),
-                  Text('Tâches'),
-                ],
-              ),
-            ),
-          ),
+          )
         ],
       ),
     );
@@ -220,18 +265,20 @@ class _MissionDetailsState extends State<MissionDetails> {
                       _buildItem(title: 'Nombre d\'intervenants', number: 5),
                       // BuildStepper(),
                       Container(
-                        width: MediaQuery.of(context).size.width - 40,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        margin: EdgeInsets.only(bottom: 10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[50],
-                          border: Border(
-                            left: BorderSide(width: 4, color: Colors.blue[50]),
+                          width: MediaQuery.of(context).size.width - 40,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          margin: EdgeInsets.only(bottom: 10),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[50],
+                            borderRadius: BorderRadius.circular(2),
+                            // border: Border(
+
+                            //   left:
+                            //       BorderSide(width: 4, color: Colors.blue[50]),
+                            // ),
                           ),
-                        ),
-                        child: BuildStepper()
-                      )
+                          child: BuildStepper())
                     ],
                   ),
                 ),
@@ -263,15 +310,15 @@ class _MissionDetailsState extends State<MissionDetails> {
             child: Text(
               '$title',
               style: TextStyle(
-                fontSize: 12,
-              ),
+                  // fontSize: 12,
+                  ),
             ),
           ),
           Container(
             child: Text(
               '$number',
               style: TextStyle(
-                fontSize: 12,
+                // fontSize: 12,
                 fontWeight: FontWeight.w600,
               ),
             ),

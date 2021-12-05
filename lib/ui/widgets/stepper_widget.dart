@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BuildStepper extends StatefulWidget {
-  const BuildStepper({Key key}) : super(key: key);
+  final int level;
+  const BuildStepper({Key key, this.level}) : super(key: key);
 
   @override
   _BuildStepperState createState() => _BuildStepperState();
@@ -10,6 +11,7 @@ class BuildStepper extends StatefulWidget {
 class _BuildStepperState extends State<BuildStepper> {
   int _currentStep = 0;
   StepperType _stepperType = StepperType.vertical;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,60 +25,22 @@ class _BuildStepperState extends State<BuildStepper> {
             ),
           ),
         ),
+        SizedBox(height: 10),
         Container(
           child: Column(
             children: [
-              Container(
-                margin: EdgeInsets.only(top: 10),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.verified,
-                      color: Colors.red,
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Container(
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Preparation',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.red,
-                                    borderRadius: BorderRadius.circular(2),
-                                  ),
-                                  padding: EdgeInsets.all(4),
-                                  child: Text(
-                                    'Fermée',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              )
+              _buildStepperItem(closed: false, title: 'Préparation ', state: 3),
+              _buildStepperItem(closed: false, title: 'Exécution', state: 3),
+              _buildStepperItem(closed: false, title: 'Nettoyage', state: 3),
+              _buildStepperItem(closed: true, title: 'Analyse', state: 1),
+              _buildStepperItem(closed: true, title: 'Rapport', state: 1),
+              _buildStepperItem(closed: true, title: 'Presentation', state: 1),
             ],
           ),
         ),
       ],
     );
+
     // return Container(
     //   child: Column(
     //     children: [
@@ -242,5 +206,106 @@ class _BuildStepperState extends State<BuildStepper> {
 
   void canceled() {
     if (_currentStep > 0) setState(() => _currentStep -= 1);
+  }
+
+  Widget _buildStepperItem(
+      {@required bool closed, @required String title, @required int state}) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.blue[50], borderRadius: BorderRadius.circular(2)),
+      padding: EdgeInsets.all(5),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.verified,
+            color: closed ? Colors.red : Colors.blue,
+          ),
+          SizedBox(width: 10),
+          Expanded(
+            child: Container(
+              // color: Colors.amber,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    // color: Colors.green,
+                    height: 25,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          state == 1
+                              ? '$title fermée'
+                              : state == 2
+                                  ? '$title en cours'
+                                  : '$title terminée ',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: closed ? Colors.red : Colors.blue,
+                          ),
+                        ),
+                        if (state != 3)
+                          Container(
+                            decoration: BoxDecoration(
+                              color: closed ? Colors.red : Colors.blue,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            padding: EdgeInsets.all(4),
+                            child: Text(
+                              closed ? 'Ouvrir' : 'Fermé ',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
+                  if (state == 2 || state == 3)
+                    Container(
+                      // height: 50,
+                      child: Column(
+                        children: [
+                          _buildParticipant(),
+                          _buildParticipant(),
+                        ],
+                      ),
+                    )
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildParticipant() {
+    return ListTile(
+      minVerticalPadding: 10,
+      horizontalTitleGap: 10,
+      contentPadding: EdgeInsets.only(bottom: 10),
+      leading: CircleAvatar(
+        radius: 18,
+        backgroundColor: Colors.blue[50],
+        backgroundImage: AssetImage('assets/images/person.jpg'),
+        // child: Icon(Icons.person),
+      ),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Optimus Ged', style: TextStyle(fontSize: 14)),
+          Text(
+            'Coordonateur directe',
+            style: TextStyle(fontSize: 12),
+          ),
+        ],
+      ),
+    );
   }
 }
