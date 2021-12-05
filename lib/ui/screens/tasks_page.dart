@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'add_task_page.dart';
 
 class TasksPage extends StatefulWidget {
