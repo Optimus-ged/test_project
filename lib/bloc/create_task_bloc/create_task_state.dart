@@ -2,31 +2,31 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class CreateParticipantState extends Equatable {
-  const CreateParticipantState();
+abstract class CreateTaskState extends Equatable {
+  const CreateTaskState();
 
   @override
   List<Object> get props => [];
 }
 
-class CreateParticipantInitial extends CreateParticipantState {}
+class CreateTaskInitial extends CreateTaskState {}
 
-class CreateParticipantInProgress extends CreateParticipantState {}
+class CreateTaskInProgress extends CreateTaskState {}
 
-class CreateParticipantFailure extends CreateParticipantState {
+class CreateTaskFailure extends CreateTaskState {
   final String message;
 
-  const CreateParticipantFailure({@required this.message});
+  const CreateTaskFailure({@required this.message});
 
   @override
   List<Object> get props => [message];
 }
 
-class CreateParticipantSuccess extends CreateParticipantState {
+class CreateTaskSuccess extends CreateTaskState {
   // final MissionsResponse missions;
 
-  // const CreateParticipantSuccess({@required this.CreateParticipant});
+  // const CreateTaskSuccess({@required this.CreateTask});
 
   // @override
-  // List<Object> get props => [CreateParticipant];
+  // List<Object> get props => [CreateTask];
 }
