@@ -39,18 +39,12 @@ class _MissionPageState extends State<MissionPage> {
             });
             Fluttertoast.showToast(
               // msg: "${state.enterpriseData}",
-              msg : 'success message',
+              msg: 'success message',
               gravity: ToastGravity.TOP,
               backgroundColor: Colors.black.withOpacity(0.6),
             );
           }
-          if (state is LoadMissionFailure) {
-            GlobalData.entreprises.clear();
-            state.enterpriseData.entreprises.forEach((e) {
-              GlobalData.entreprises
-                  .add(_enterpriseItem(context, enterprise: e));
-            });
-          }
+          if (state is LoadMissionFailure) {}
         },
         child: Padding(
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
@@ -222,19 +216,23 @@ class _MissionPageState extends State<MissionPage> {
   Widget _buildItemList(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child: Column(
-        children: [
-          _buildMissionItem(
-            ontap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => MissionDetails(),
-              ),
+      child: !isLoading
+          ? Column(
+              children: [
+                _buildMissionItem(
+                  ontap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => MissionDetails(),
+                    ),
+                  ),
+                ),
+                _buildMissionItem(),
+                _buildMissionItem(),
+              ],
+            )
+          : Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
-          _buildMissionItem(),
-          _buildMissionItem(),
-        ],
-      ),
     );
   }
 }
