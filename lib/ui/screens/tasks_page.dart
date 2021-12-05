@@ -92,10 +92,12 @@ class _TasksPageState extends State<TasksPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // _customAvatar(),
-                      // _loginInput(color: Colors.blue[50], hint: 'Nom'),
-                      // _loginInput(color: Colors.blue[50], hint: 'tache'),
-                      // _loginInput(color: Colors.blue[50], hint: 'role')
+                      _buildTaskItem(title: 'coordination de l\'equipe'),
+                      _buildTaskItem(title: 'recolte des donnees'),
+                      _buildTaskItem(title: 'coordination de l\'equipe'),
+                      _buildTaskItem(title: 'recolte des donnees'),
+                      _buildTaskItem(title: 'coordination de l\'equipe'),
+                      _buildTaskItem(title: 'recolte des donnees'),
                     ],
                   ),
                 ),
@@ -146,6 +148,20 @@ class _TasksPageState extends State<TasksPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTaskItem({String title}) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 5),
+      width: MediaQuery.of(context).size.width - 40,
+      decoration: BoxDecoration(
+          color: Colors.blue[50], borderRadius: BorderRadius.circular(2)),
+      padding: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 10,
+      ),
+      child: Text('$title'),
     );
   }
 }
