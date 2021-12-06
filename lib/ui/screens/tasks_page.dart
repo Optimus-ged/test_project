@@ -12,7 +12,6 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPageState extends State<TasksPage> {
-  List<String> _allTasks = [];
   List<Widget> _taskLists = [];
   void _loadTasks() {
     if (widget.allTasks.length != 0) {
@@ -84,7 +83,7 @@ class _TasksPageState extends State<TasksPage> {
               ),
             ),
           ),
-          Text('Tâches ${_taskLists.length}')
+          Text('Tâches')
         ],
       ),
     );
@@ -104,7 +103,7 @@ class _TasksPageState extends State<TasksPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Container(
+              child: _taskLists.length != 0 ? Container(
                 width: MediaQuery.of(context).size.width - 40,
                 // color: Colors.amber,
                 padding: EdgeInsets.only(bottom: 20, top: 20),
@@ -114,6 +113,8 @@ class _TasksPageState extends State<TasksPage> {
                     children: _taskLists,
                   ),
                 ),
+              ) : Container(
+                child: Icon(Icons.local_cafe_rounded, size: 50,),
               ),
             ),
             // _buildButton(context),
@@ -123,46 +124,7 @@ class _TasksPageState extends State<TasksPage> {
     );
   }
 
-  Widget _buildButton(BuildContext context) {
-    return Container(
-      // padding: EdgeInsets.only(bottom: 0, left: 20, right: 20),
-      alignment: Alignment.bottomCenter,
-      child: Material(
-        elevation: 4,
-        color: Colors.grey[400],
-        borderRadius: BorderRadius.circular(30),
-        child: Container(
-          height: 50,
-          width: MediaQuery.of(context).size.width,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            // color: CustomTheme.redColor,
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: InkWell(
-            // onTap: () => _loginBtnPressed(),
-            // onTap: () => Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => AddParticipant(),
-            //   ),
-            // ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.save, color: Colors.white),
-                SizedBox(width: 5),
-                Text(
-                  'Enregistrer',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+
 
   Widget _buildTaskItem({String title}) {
     return Container(
