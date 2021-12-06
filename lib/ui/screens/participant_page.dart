@@ -1,6 +1,7 @@
 import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
 import 'package:ackaton_manage/bloc/mission_bloc/mission_state.dart';
 import 'package:ackaton_manage/models/mission/mission_response.dart';
+import 'package:ackaton_manage/ui/widgets/hero_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,6 +27,7 @@ class _ParticipantPageState extends State<ParticipantPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         color: Colors.blue[50],
@@ -89,7 +91,12 @@ class _ParticipantPageState extends State<ParticipantPage> {
         if (state is LoadMissionSuccess) {
           // Traitments
           widget.mission.members.forEach((e) {
-            _participantWidgetList.add(_participantItem(e));
+            _participantWidgetList.add(
+              _participantItem(
+                e,
+                MediaQuery.of(context).size,
+              ),
+            );
           });
 
           // Building the Ui
@@ -129,69 +136,135 @@ class _ParticipantPageState extends State<ParticipantPage> {
     );
   }
 
-  Widget _buildButton(BuildContext context) {
-    return Container(
-      // padding: EdgeInsets.only(bottom: 0, left: 20, right: 20),
-      alignment: Alignment.bottomCenter,
-      child: Material(
-        elevation: 4,
-        color: Colors.grey[400],
-        borderRadius: BorderRadius.circular(30),
-        child: Container(
-          height: 50,
-          width: MediaQuery.of(context).size.width,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            // color: CustomTheme.redColor,
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: InkWell(
-            // onTap: () => _loginBtnPressed(),
-            // onTap: () => Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => AddParticipant(),
-            //   ),
-            // ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.save, color: Colors.white),
-                SizedBox(width: 5),
-                Text(
-                  'Enregistrer',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+  Widget _participantItem(Members participant, Size screenSize) {
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        new HeroDialogRoute(
+          builder: (BuildContext context) {
+            return Padding(
+              padding: EdgeInsets.only(
+                left: screenSize.width * .15,
+                right: screenSize.width * .15,
+                bottom: screenSize.height * .20,
+              ),
+              child: AlertDialog(
+                backgroundColor: Colors.transparent,
+                actionsPadding: EdgeInsets.all(0),
+                buttonPadding: EdgeInsets.all(0),
+                insetPadding: EdgeInsets.all(0),
+                elevation: 0,
+                titlePadding: EdgeInsets.all(0),
+                contentPadding: EdgeInsets.only(left: 0, right: 0, bottom: 0),
+                content: Builder(
+                  builder: (context) => Hero(
+                    tag: '${participant.memberId}',
+                    child: new Container(
+                      height: 300.0,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        // image: DecorationImage(
+                        //   image: AssetImage(
+                        //     '$photo',
+                        //   ),
+                        //   fit: BoxFit.cover,
+                        // ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Material(
+                            color: Colors.transparent,
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              color: Colors.black.withOpacity(0.3),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 7),
+                                child: Text(
+                                  'eee',
+                                  style: TextStyle(
+                                    color: Colors.white70,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                      colors: [
+                                        Colors.black54,
+                                        Colors.transparent,
+                                      ],
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.message,
+                                          color: Colors.white70,
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          'Message',
+                                          style: TextStyle(
+                                            color: Colors.white70,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
-    );
-  }
-
-  Widget _participantItem(Members participant) {
-    return Container(
-      // color: Colors.green,
-      child: ListTile(
-        minVerticalPadding: 10,
-        horizontalTitleGap: 10,
-        contentPadding: EdgeInsets.only(bottom: 10),
-        leading: CircleAvatar(
-          radius: 30,
-          backgroundColor: Colors.blue[50],
-          backgroundImage: AssetImage('assets/images/person.jpg'),
-          // child: Icon(Icons.person),
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('${participant.memberName}', style: TextStyle(fontSize: 14)),
-            Text(
-              '${participant.telephone}',
-              style: TextStyle(fontSize: 12),
-            ),
-          ],
+      child: Container(
+        // color: Colors.green,
+        child: ListTile(
+          minVerticalPadding: 10,
+          horizontalTitleGap: 10,
+          contentPadding: EdgeInsets.only(bottom: 10),
+          leading: CircleAvatar(
+            radius: 30,
+            backgroundColor: Colors.blue[50],
+            backgroundImage: AssetImage('assets/images/person.jpg'),
+            // child: Icon(Icons.person),
+          ),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('${participant.memberName}', style: TextStyle(fontSize: 14)),
+              Text(
+                '${participant.telephone}',
+                style: TextStyle(fontSize: 12),
+              ),
+            ],
+          ),
         ),
       ),
     );

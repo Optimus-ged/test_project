@@ -1,5 +1,4 @@
-import 'package:ackaton_manage/models/mission/mission_response.dart';
-import 'package:ackaton_manage/ui/widgets/build_widget.dart';
+import 'package:ackaton_manage/ui/widgets/build_task_widget.dart';
 import 'package:flutter/material.dart';
 import 'add_task_page.dart';
 
