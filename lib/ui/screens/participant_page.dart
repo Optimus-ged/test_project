@@ -1,16 +1,29 @@
+import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
+import 'package:ackaton_manage/bloc/mission_bloc/mission_state.dart';
+import 'package:ackaton_manage/models/mission/mission_response.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'add_participant_page.dart';
-import 'add_task_page.dart';
 
 class ParticipantPage extends StatefulWidget {
-  const ParticipantPage({Key key}) : super(key: key);
+  final Data mission;
+  const ParticipantPage({this.mission, Key key}) : super(key: key);
 
   @override
   _ParticipantPageState createState() => _ParticipantPageState();
 }
 
 class _ParticipantPageState extends State<ParticipantPage> {
+  LoadMissionBloc _loadMissionBloc;
+  List<Widget> _participantWidgetList = [];
+
+  @override
+  void initState() {
+    _loadMissionBloc = BlocProvider.of<LoadMissionBloc>(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,42 +85,49 @@ class _ParticipantPageState extends State<ParticipantPage> {
   }
 
   Widget _buildContent(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(20),
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Container(
-                width: MediaQuery.of(context).size.width - 40,
-                // color: Colors.amber,
-                padding: EdgeInsets.only(bottom: 20, top: 20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _participantItem(),
-                      _participantItem(),
-                      _participantItem(),
-                      _participantItem(),
-                      _participantItem(),
-                      _participantItem(),
-                    ],
-                  ),
+    return BlocBuilder<LoadMissionBloc, LoadMissionState>(
+      bloc: _loadMissionBloc,
+      builder: (context, state) {
+        if (state is LoadMissionSuccess) {
+          // Traitments
+          widget.mission.members.forEach((e) {
+            _participantWidgetList.add(_participantItem(e));
+          });
+
+          // Building the Ui
+          return Expanded(
+            child: Container(
+              padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
                 ),
               ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width - 40,
+                      // color: Colors.amber,
+                      padding: EdgeInsets.only(bottom: 20, top: 20),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: _participantWidgetList,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // _buildButton(context),
+                ],
+              ),
             ),
-            // _buildButton(context),
-          ],
-        ),
-      ),
+          );
+        }
+        return Container();
+      },
     );
   }
 
@@ -152,7 +172,7 @@ class _ParticipantPageState extends State<ParticipantPage> {
     );
   }
 
-  Widget _participantItem() {
+  Widget _participantItem(Members participant) {
     return Container(
       // color: Colors.green,
       child: ListTile(
@@ -168,7 +188,7 @@ class _ParticipantPageState extends State<ParticipantPage> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Optimus Ged', style: TextStyle(fontSize: 14)),
+            Text('${participant.memberName}', style: TextStyle(fontSize: 14)),
             Text(
               'Coordonateur directe',
               style: TextStyle(fontSize: 12),
