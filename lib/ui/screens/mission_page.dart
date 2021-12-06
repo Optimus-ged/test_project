@@ -7,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 
+import 'mission_details.dart';
+
 class MissionPage extends StatefulWidget {
   const MissionPage({Key key}) : super(key: key);
 
@@ -26,7 +28,7 @@ class _MissionPageState extends State<MissionPage> {
     super.initState();
   }
 
-  void _loadMissionList() {
+  void _loadList() {
     GlobalData.missions.forEach((e) {
       _missionListWwidget.add(_buildMissionItem(mission: e));
     });
@@ -39,16 +41,16 @@ class _MissionPageState extends State<MissionPage> {
         bloc: _loadMissionBloc,
         listener: (context, state) {
           if (state is LoadMissionInProgress) {
-            setState(() {
-              isLoading = true;
-            });
+            // setState(() {
+            //   isLoading = true;
+            // });
           }
           if (state is LoadMissionSuccess) {
-            setState(() {
-              isLoading = false;
-              GlobalData.missions.addAll(state.missions.data);
-              _loadMissionList();
-            });
+            // setState(() {
+            //   isLoading = false;
+            //   GlobalData.missions.addAll(state.missions.data);
+            //   _loadList();
+            // });
           }
           if (state is LoadMissionFailure) {
             Fluttertoast.showToast(
@@ -58,21 +60,38 @@ class _MissionPageState extends State<MissionPage> {
             );
           }
         },
-        child: Padding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _buildSearch(context),
-                isLoading
-                    ? Padding(
-                        padding: const EdgeInsets.only(top: 100),
-                        child: CircularProgressIndicator(),
-                      )
-                    : _buildItemList(context),
-              ],
-            ),
-          ),
+        child: BlocBuilder<LoadMissionBloc, LoadMissionState>(
+          bloc: _loadMissionBloc,
+          builder: (context, state) {
+            if (state is LoadMissionInProgress) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 100),
+                child: Center(child: CircularProgressIndicator()),
+              );
+            }
+            if (state is LoadMissionSuccess) {
+              // Traitments
+              GlobalData.missions.addAll(state.missions.data);
+              _loadList();
+
+              // Building the Ui
+              return Padding(
+                padding:
+                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _buildSearch(context),
+                      _buildItemList(context),
+                    ],
+                  ),
+                ),
+              );
+            } else {
+              return Container();
+            }
+          },
         ),
       ),
     );
@@ -154,7 +173,7 @@ class _MissionPageState extends State<MissionPage> {
     );
   }
 
-  Widget _buildMissionItem({VoidCallback ontap, Data mission}) {
+  Widget _buildMissionItem({Data mission}) {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
       child: Row(
@@ -210,7 +229,11 @@ class _MissionPageState extends State<MissionPage> {
                     ),
                     Spacer(),
                     GestureDetector(
-                      onTap: ontap,
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => MissionDetails(),
+                        ),
+                      ),
                       child: Container(
                         padding: EdgeInsets.all(5),
                         decoration: BoxDecoration(
