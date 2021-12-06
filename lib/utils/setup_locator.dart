@@ -1,3 +1,4 @@
+import 'package:ackaton_manage/data/repository/data_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'preferences_helper.dart';
 
@@ -9,7 +10,7 @@ void setup() async {
       await SharedPreferencesHelper.getInstance();
 
   // All module instances
-  // locator.registerLazySingleton<DataRepository>(() => DataRepository());
+  locator.registerLazySingleton<DataRepository>(() => DataRepository());
   locator.registerLazySingleton<SharedPreferencesHelper>(
     () => sharedPreferencesHelper,
   );

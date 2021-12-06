@@ -1,4 +1,3 @@
-
 import 'package:ackaton_manage/data/dio/interceptors.dart';
 import 'package:ackaton_manage/models/mission/mission_response.dart';
 import 'package:dio/dio.dart';
@@ -66,11 +65,12 @@ class DataRepository {
   //   return PayTaxeResponse.fromJson(result.data);
   // }
 
-  Future<MissionResponse> getAllMissions(String id) async {
+  Future<MissionResponse> getAllMissions() async {
     final result = await _dio.get(
       "/get_project_list",
     );
     return MissionResponse.fromJson(result.data);
   }
-
 }
+
+final dataRepository = DataRepository();

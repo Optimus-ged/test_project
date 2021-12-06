@@ -65,7 +65,10 @@ class _MissionPageState extends State<MissionPage> {
               children: [
                 _buildSearch(context),
                 isLoading
-                    ? CircularProgressIndicator()
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 100),
+                        child: CircularProgressIndicator(),
+                      )
                     : _buildItemList(context),
               ],
             ),
@@ -149,7 +152,7 @@ class _MissionPageState extends State<MissionPage> {
     );
   }
 
-  Widget _buildMissionItem({VoidCallback ontap, Data  mission }) {
+  Widget _buildMissionItem({VoidCallback ontap, Data mission}) {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
       child: Row(

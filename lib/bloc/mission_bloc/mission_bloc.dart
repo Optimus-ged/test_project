@@ -5,7 +5,7 @@ import 'mission_events.dart';
 import 'mission_state.dart';
 
 class LoadMissionBloc extends Bloc<LoadMissionEvent, LoadMissionState> {
-  get _api => locator.get<DataRepository>();
+  // get _api => locator.get<DataRepository>();
   LoadMissionBloc() : super(LoadMissionInitial());
 
   @override
@@ -17,9 +17,9 @@ class LoadMissionBloc extends Bloc<LoadMissionEvent, LoadMissionState> {
       LoadMissionEvent event) async* {
     try {
       yield LoadMissionInProgress();
-      final missions = await _api.getAllMissions();
+      final missions = await dataRepository.getAllMissions();
       if (missions.data != null) {
-        yield LoadMissionSuccess(missions: missions.data);
+        yield LoadMissionSuccess(missions: missions);
       } else {
         yield LoadMissionFailure(message: 'erreur');
       }
