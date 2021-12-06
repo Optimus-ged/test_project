@@ -99,21 +99,23 @@ class _BuildStepperState extends State<BuildStepper> {
                         if (state != 3)
                           Container(
                             decoration: BoxDecoration(
-                              color: closed ? Colors.red : Colors.blue,
+                              color: Colors.transparent,
                               borderRadius: BorderRadius.circular(20),
-                              // border: Border.all(
-                              //   width: 1,
-                              //   color: Colors.red,
-                              //   style: BorderStyle.solid
-                              // )
+                              //   border: Border.all(
+                              //       width: 2,
+                              //       color: Colors.red,
+                              //       style: BorderStyle.solid),
                             ),
-                            padding: EdgeInsets.all(4),
+                            padding: EdgeInsets.symmetric(
+                              vertical: 2,
+                              horizontal: 10,
+                            ),
                             child: Text(
                               closed ? 'Ouvrir' : 'Fermé ',
                               style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
+                                  fontSize: 12,
+                                  color: closed ? Colors.red : Colors.blue,// Colors.black87,
+                                  decoration: TextDecoration.underline),
                             ),
                           )
                       ],

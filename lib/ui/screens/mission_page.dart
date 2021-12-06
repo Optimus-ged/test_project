@@ -29,6 +29,7 @@ class _MissionPageState extends State<MissionPage> {
   }
 
   void _loadList() {
+    _missionListWwidget.clear();
     GlobalData.missions.forEach((e) {
       _missionListWwidget.add(_buildMissionItem(mission: e));
     });
@@ -127,7 +128,7 @@ class _MissionPageState extends State<MissionPage> {
                         child: TextField(
                           decoration: InputDecoration.collapsed(
                             hintText:
-                                'rechercher... ${GlobalData.missions.length}',
+                                'rechercher...',
                           ),
                         ),
                       ),
@@ -233,7 +234,7 @@ class _MissionPageState extends State<MissionPage> {
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => MissionDetails(
-                            mission: mission ,
+                            mission: mission,
                           ),
                         ),
                       ),

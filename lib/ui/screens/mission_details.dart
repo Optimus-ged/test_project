@@ -281,13 +281,13 @@ class _MissionDetailsState extends State<MissionDetails> {
                                     color: Colors.black),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: '${widget.mission.startDate}',
+                                    text: ' ${widget.mission.startDate}',
                                     style: TextStyle(
                                       color: Colors.green,
                                       // fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  TextSpan(text: ' au'),
+                                  TextSpan(text: ' au '),
                                   TextSpan(
                                     text: '${widget.mission.endDate}',
                                     style: TextStyle(
@@ -301,9 +301,10 @@ class _MissionDetailsState extends State<MissionDetails> {
                             SizedBox(height: 10),
                             _buildItem(
                                 title: 'Nombre de jour',
-                                number: '${widget.mission.nbrJours}'),
+                                number: ' ${widget.mission.nbrJours}'),
                             _buildItem(
-                                title: 'Nombre des taches', number: '${_allTasks.length}'),
+                                title: 'Nombre des taches',
+                                number: '${_allTasks.length}'),
                             _buildItem(
                                 title: 'Nombre d\'intervenants',
                                 number: '${widget.mission.members.length}'),
