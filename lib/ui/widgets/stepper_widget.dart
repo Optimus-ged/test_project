@@ -40,8 +40,137 @@ class _BuildStepperState extends State<BuildStepper> {
         ),
       ],
     );
+  }
 
-    // return Container(
+  tapped(int step) {
+    setState(() {
+      _currentStep = step;
+    });
+  }
+
+  void continued() {
+    if (_currentStep < 5) setState(() => _currentStep += 1);
+  }
+
+  void canceled() {
+    if (_currentStep > 0) setState(() => _currentStep -= 1);
+  }
+
+  Widget _buildStepperItem(
+      {@required bool closed, @required String title, @required int state}) {
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.blue[50], borderRadius: BorderRadius.circular(2)),
+      padding: EdgeInsets.all(5),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.verified,
+            color: closed ? Colors.red : Colors.blue,
+          ),
+          SizedBox(width: 10),
+          Expanded(
+            child: Container(
+              // color: Colors.amber,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    // color: Colors.green,
+                    height: 25,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          state == 1
+                              ? '$title fermée'
+                              : state == 2
+                                  ? '$title en cours'
+                                  : '$title terminée ',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: closed ? Colors.red : Colors.blue,
+                          ),
+                        ),
+                        if (state != 3)
+                          Container(
+                            decoration: BoxDecoration(
+                              color: closed ? Colors.red : Colors.blue,
+                              borderRadius: BorderRadius.circular(20),
+                              // border: Border.all(
+                              //   width: 1,
+                              //   color: Colors.red,
+                              //   style: BorderStyle.solid
+                              // )
+                            ),
+                            padding: EdgeInsets.all(4),
+                            child: Text(
+                              closed ? 'Ouvrir' : 'Fermé ',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
+                  if (state == 2 || state == 3)
+                    Container(
+                      // height: 50,
+                      child: Column(
+                        children: [
+                          _buildParticipant(),
+                          _buildParticipant(),
+                        ],
+                      ),
+                    )
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildParticipant() {
+    return ListTile(
+      minVerticalPadding: 10,
+      horizontalTitleGap: 10,
+      contentPadding: EdgeInsets.only(bottom: 10),
+      leading: CircleAvatar(
+        radius: 18,
+        backgroundColor: Colors.blue[50],
+        backgroundImage: AssetImage('assets/images/person.jpg'),
+        // child: Icon(Icons.person),
+      ),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Optimus Ged', style: TextStyle(fontSize: 14)),
+          Text(
+            'Coordonateur directe',
+            style: TextStyle(fontSize: 12),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+// return Container(
     //   child: Column(
     //     children: [
     //       Stepper(
@@ -191,121 +320,4 @@ class _BuildStepperState extends State<BuildStepper> {
     //   controlsBuilder: (BuildContext context,
     //           {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
     //       Container(),
-    // ));
-  }
-
-  tapped(int step) {
-    setState(() {
-      _currentStep = step;
-    });
-  }
-
-  void continued() {
-    if (_currentStep < 5) setState(() => _currentStep += 1);
-  }
-
-  void canceled() {
-    if (_currentStep > 0) setState(() => _currentStep -= 1);
-  }
-
-  Widget _buildStepperItem(
-      {@required bool closed, @required String title, @required int state}) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.blue[50], borderRadius: BorderRadius.circular(2)),
-      padding: EdgeInsets.all(5),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Icon(
-            Icons.verified,
-            color: closed ? Colors.red : Colors.blue,
-          ),
-          SizedBox(width: 10),
-          Expanded(
-            child: Container(
-              // color: Colors.amber,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    // color: Colors.green,
-                    height: 25,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          state == 1
-                              ? '$title fermée'
-                              : state == 2
-                                  ? '$title en cours'
-                                  : '$title terminée ',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: closed ? Colors.red : Colors.blue,
-                          ),
-                        ),
-                        if (state != 3)
-                          Container(
-                            decoration: BoxDecoration(
-                              color: closed ? Colors.red : Colors.blue,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            padding: EdgeInsets.all(4),
-                            child: Text(
-                              closed ? 'Ouvrir' : 'Fermé ',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
-                      ],
-                    ),
-                  ),
-                  if (state == 2 || state == 3)
-                    Container(
-                      // height: 50,
-                      child: Column(
-                        children: [
-                          _buildParticipant(),
-                          _buildParticipant(),
-                        ],
-                      ),
-                    )
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildParticipant() {
-    return ListTile(
-      minVerticalPadding: 10,
-      horizontalTitleGap: 10,
-      contentPadding: EdgeInsets.only(bottom: 10),
-      leading: CircleAvatar(
-        radius: 18,
-        backgroundColor: Colors.blue[50],
-        backgroundImage: AssetImage('assets/images/person.jpg'),
-        // child: Icon(Icons.person),
-      ),
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Optimus Ged', style: TextStyle(fontSize: 14)),
-          Text(
-            'Coordonateur directe',
-            style: TextStyle(fontSize: 12),
-          ),
-        ],
-      ),
-    );
-  }
-}
+    // ))
