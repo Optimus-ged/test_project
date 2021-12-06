@@ -71,6 +71,7 @@ class _MissionPageState extends State<MissionPage> {
             }
             if (state is LoadMissionSuccess) {
               // Traitments
+              GlobalData.missions.clear();
               GlobalData.missions.addAll(state.missions.data);
               _loadList();
 
@@ -231,7 +232,9 @@ class _MissionPageState extends State<MissionPage> {
                     GestureDetector(
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => MissionDetails(),
+                          builder: (context) => MissionDetails(
+                            mission: mission ,
+                          ),
                         ),
                       ),
                       child: Container(

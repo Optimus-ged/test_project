@@ -1,19 +1,33 @@
+import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
+import 'package:ackaton_manage/bloc/mission_bloc/mission_state.dart';
+import 'package:ackaton_manage/constants/theme.dart';
+import 'package:ackaton_manage/models/mission/mission_response.dart';
 import 'package:ackaton_manage/ui/screens/participant_page.dart';
 import 'package:ackaton_manage/ui/widgets/stepper_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'add_affectation_page.dart';
 import 'add_participant_page.dart';
 import 'tasks_page.dart';
 
 class MissionDetails extends StatefulWidget {
-  const MissionDetails({Key key}) : super(key: key);
+  final Data mission;
+  const MissionDetails({@required this.mission, Key key}) : super(key: key);
 
   @override
   _MissionDetailsState createState() => _MissionDetailsState();
 }
 
 class _MissionDetailsState extends State<MissionDetails> {
+  LoadMissionBloc _loadMissionBloc;
+
+  @override
+  void initState() {
+    _loadMissionBloc = BlocProvider.of<LoadMissionBloc>(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -198,97 +212,106 @@ class _MissionDetailsState extends State<MissionDetails> {
   }
 
   Widget _buildContent() {
-    return Expanded(
-      child: Container(
-        // padding: EdgeInsets.symmetric(horizontal: 20),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(20),
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              // color: Colors.red,
-              height: MediaQuery.of(context).size.height - 84,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 20),
-                      _buildMissionItem(),
-                      // SizedBox(height: 20),
-                      // Text(
-                      //   'A propos',
-                      //   style: TextStyle(
-                      //     fontSize: 12,
-                      //     color: Colors.black,
-                      //     fontWeight: FontWeight.w600,
-                      //     decoration: TextDecoration.underline,
-                      //   ),
-                      // ),
-                      // SizedBox(height: 5),
-                      // RichText(
-                      //   text: TextSpan(
-                      //     text:
-                      //         'Lorem ipsum dolor sit amet consectetur adipisicing elit Iure nihil magnam accusamus, iusto inventore molestias ipsum dolor sit amet consectetur adipisicing elit. Iurenihil magnam accusamus, iusto inventore molestias cette mission va va du',
-                      //     style: TextStyle(
-                      //         fontSize: 11,
-                      //         fontFamily: '${CustomTheme.secondaryFont}',
-                      //         color: Colors.black),
-                      //     children: const <TextSpan>[
-                      //       TextSpan(
-                      //         text: ' 01/01/2021',
-                      //         style: TextStyle(
-                      //           color: Colors.green,
-                      //           // fontWeight: FontWeight.w600,
-                      //         ),
-                      //       ),
-                      //       TextSpan(text: ' au'),
-                      //       TextSpan(
-                      //         text: ' 01/01/2022',
-                      //         style: TextStyle(
-                      //           // fontWeight: FontWeight.w600,
-                      //           color: Colors.red,
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      SizedBox(height: 10),
-                      _buildItem(title: 'Nombre de jour', number: '365'),
-                      _buildItem(title: 'Nombre des taches', number: '20'),
-                      _buildItem(title: 'Nombre d\'intervenants', number: 5),
-                      // BuildStepper(),
-                      Container(
-                          width: MediaQuery.of(context).size.width - 40,
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          margin: EdgeInsets.only(bottom: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[50],
-                            borderRadius: BorderRadius.circular(2),
-                            // border: Border(
-
-                            //   left:
-                            //       BorderSide(width: 4, color: Colors.blue[50]),
-                            // ),
-                          ),
-                          child: BuildStepper())
-                    ],
-                  ),
+    return BlocBuilder<LoadMissionBloc, LoadMissionState>(
+      bloc: _loadMissionBloc,
+      builder: (context, state) {
+        if (state is LoadMissionSuccess) {
+          return Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
                 ),
               ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    // color: Colors.red,
+                    height: MediaQuery.of(context).size.height - 84,
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 20),
+                            _buildMissionItem(),
+                            SizedBox(height: 20),
+                            Text(
+                              'A propos',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            RichText(
+                              text: TextSpan(
+                                text:
+                                    'Lorem ipsum dolor sit amet consectetur adipisicing elit Iure nihil magnam accusamus, iusto inventore molestias ipsum dolor sit amet consectetur adipisicing elit. Iurenihil magnam accusamus, iusto inventore molestias cette mission va va du',
+                                style: TextStyle(
+                                    fontSize: 11,
+                                    fontFamily: '${CustomTheme.secondaryFont}',
+                                    color: Colors.black),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: '${widget.mission.startDate}',
+                                    style: TextStyle(
+                                      color: Colors.green,
+                                      // fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  TextSpan(text: ' au'),
+                                  TextSpan(
+                                    text: '${widget.mission.endDate}',
+                                    style: TextStyle(
+                                      // fontWeight: FontWeight.w600,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            _buildItem(title: 'Nombre de jour', number: '${widget.mission.nbrJours}'),
+                            _buildItem(
+                                title: 'Nombre des taches', number: '20'),
+                            _buildItem(
+                                title: 'Nombre d\'intervenants', number: '${widget.mission.members.length}'),
+                            // BuildStepper(),
+                            Container(
+                                width: MediaQuery.of(context).size.width - 40,
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                margin: EdgeInsets.only(bottom: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[50],
+                                  borderRadius: BorderRadius.circular(2),
+                                  // border: Border(
+
+                                  //   left:
+                                  //       BorderSide(width: 4, color: Colors.blue[50]),
+                                  // ),
+                                ),
+                                child: BuildStepper())
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Spacer(),
+                  // _buildButton(),
+                ],
+              ),
             ),
-            // Spacer(),
-            // _buildButton(),
-          ],
-        ),
-      ),
+          );
+        }
+        return Container();
+      },
     );
   }
 
