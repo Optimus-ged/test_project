@@ -1,6 +1,8 @@
 import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
+import 'package:ackaton_manage/bloc/mission_bloc/mission_events.dart';
 import 'package:ackaton_manage/bloc/mission_bloc/mission_state.dart';
-import 'package:ackaton_manage/ui/screens/mission_details.dart';
+import 'package:ackaton_manage/constants/variable.dart';
+import 'package:ackaton_manage/models/mission/mission_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +16,21 @@ class MissionPage extends StatefulWidget {
 
 class _MissionPageState extends State<MissionPage> {
   LoadMissionBloc _loadMissionBloc;
+  List<Widget> _missionListWwidget = [];
   bool isLoading = false;
 
   @override
   void initState() {
-    _loadMissionBloc = BlocProvider.of<LoadMissionBloc>(context);
+    _loadMissionBloc = BlocProvider.of<LoadMissionBloc>(context)
+      ..add(LoadMissionsLoaded());
+    _loadMissionList();
     super.initState();
+  }
+
+  void _loadMissionList() {
+    GlobalData.missions.forEach((e) {
+      _missionListWwidget.add(_buildMissionItem());
+    });
   }
 
   @override
@@ -36,15 +47,16 @@ class _MissionPageState extends State<MissionPage> {
           if (state is LoadMissionSuccess) {
             setState(() {
               isLoading = false;
+              GlobalData.missions.addAll(state.missions.data);
             });
+          }
+          if (state is LoadMissionFailure) {
             Fluttertoast.showToast(
-              // msg: "${state.enterpriseData}",
-              msg: 'success message',
+              msg: '${state.message}',
               gravity: ToastGravity.TOP,
               backgroundColor: Colors.black.withOpacity(0.6),
             );
           }
-          if (state is LoadMissionFailure) {}
         },
         child: Padding(
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
@@ -52,7 +64,9 @@ class _MissionPageState extends State<MissionPage> {
             child: Column(
               children: [
                 _buildSearch(context),
-                _buildItemList(context),
+                isLoading
+                    ? CircularProgressIndicator()
+                    : _buildItemList(context),
               ],
             ),
           ),
@@ -135,7 +149,7 @@ class _MissionPageState extends State<MissionPage> {
     );
   }
 
-  Widget _buildMissionItem({VoidCallback ontap}) {
+  Widget _buildMissionItem({VoidCallback ontap, Data  mission }) {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
       child: Row(
@@ -174,7 +188,8 @@ class _MissionPageState extends State<MissionPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'ISIG Goma',
+                      // 'ISIG Goma',
+                      '${mission.projectName}',
                       style: TextStyle(
                         // fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -218,17 +233,18 @@ class _MissionPageState extends State<MissionPage> {
       padding: const EdgeInsets.only(bottom: 10),
       child: !isLoading
           ? Column(
-              children: [
-                _buildMissionItem(
-                  ontap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MissionDetails(),
-                    ),
-                  ),
-                ),
-                _buildMissionItem(),
-                _buildMissionItem(),
-              ],
+              // children: [
+              //   _buildMissionItem(
+              //     ontap: () => Navigator.of(context).push(
+              //       MaterialPageRoute(
+              //         builder: (context) => MissionDetails(),
+              //       ),
+              //     ),
+              //   ),
+              //   _buildMissionItem(),
+              //   _buildMissionItem(),
+              // ],
+              children: _missionListWwidget,
             )
           : Center(child: CircularProgressIndicator()),
     );
