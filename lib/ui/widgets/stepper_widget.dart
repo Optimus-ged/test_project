@@ -29,10 +29,10 @@ class _BuildStepperState extends State<BuildStepper> {
         Container(
           child: Column(
             children: [
-              _buildStepperItem(closed: false, title: 'Préparation ', state: 3),
-              _buildStepperItem(closed: false, title: 'Exécution', state: 3),
-              _buildStepperItem(closed: false, title: 'Nettoyage', state: 3),
-              _buildStepperItem(closed: true, title: 'Analyse', state: 1),
+              _buildStepperItem(closed: false, title: 'Préparation ', state: 1),
+              _buildStepperItem(closed: false, title: 'Exécution', state: 1),
+              _buildStepperItem(closed: false, title: 'Nettoyage', state: 1),
+              _buildStepperItem(closed: false, title: 'Analyse', state: 1),
               _buildStepperItem(closed: true, title: 'Rapport', state: 1),
               _buildStepperItem(closed: true, title: 'Presentation', state: 1),
             ],
