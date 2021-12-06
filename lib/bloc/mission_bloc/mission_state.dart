@@ -1,3 +1,4 @@
+import 'package:ackaton_manage/models/mission/mission_response.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -23,10 +24,10 @@ class LoadMissionFailure extends LoadMissionState {
 }
 
 class LoadMissionSuccess extends LoadMissionState {
-  // final MissionsResponse missions;
+  final MissionResponse missions;
 
-  // const LoadMissionSuccess({@required this.LoadMission});
+  const LoadMissionSuccess({@required this.missions});
 
-  // @override
-  // List<Object> get props => [LoadMission];
+  @override
+  List<Object> get props => [missions];
 }

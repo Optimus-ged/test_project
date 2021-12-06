@@ -1,5 +1,6 @@
 
 import 'package:ackaton_manage/data/dio/interceptors.dart';
+import 'package:ackaton_manage/models/mission/mission_response.dart';
 import 'package:dio/dio.dart';
 
 const upload = 'http://192.168.137.1:3050/images/';
@@ -11,7 +12,7 @@ class DataRepository {
   DataRepository() {
     if (_dio == null) {
       BaseOptions options = BaseOptions(
-        baseUrl: "http://192.168.137.1:3050/api",
+        baseUrl: "http://192.168.137.1/project/hackaton/public/api",
         receiveDataWhenStatusError: true,
         connectTimeout: 1000 * 30, // 30 seconds
         receiveTimeout: 1000 * 30, // 30 seconds
@@ -65,17 +66,11 @@ class DataRepository {
   //   return PayTaxeResponse.fromJson(result.data);
   // }
 
-  // Future<GetAllEnterprisesResponse> getAllMissions(String id) async {
-  //   final result = await _dio.get(
-  //     "/enterprise/all/$id",
-  //   );
-  //   return GetAllEnterprisesResponse.fromJson(result.data);
-  // }
+  Future<MissionResponse> getAllMissions(String id) async {
+    final result = await _dio.get(
+      "/get_project_list",
+    );
+    return MissionResponse.fromJson(result.data);
+  }
 
-  // Future<GetAllParticipants> loadParticipants(String id) async {
-  //   final result = await _dio.get(
-  //     "/enterprise/all/$id",
-  //   );
-  //   return GetAllEnterprisesResponse.fromJson(result.data);
-  // }
 }
