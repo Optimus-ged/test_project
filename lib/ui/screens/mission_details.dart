@@ -7,7 +7,6 @@ import 'package:ackaton_manage/ui/widgets/stepper_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'add_affectation_page.dart';
-import 'add_participant_page.dart';
 import 'tasks_page.dart';
 
 class MissionDetails extends StatefulWidget {
@@ -20,9 +19,29 @@ class MissionDetails extends StatefulWidget {
 
 class _MissionDetailsState extends State<MissionDetails> {
   LoadMissionBloc _loadMissionBloc;
+  List<String> _allTasks = [];
+
+  void _loadTasks() {
+    if (widget.mission.members.length != 0) {
+      widget.mission.members.forEach(
+        (e) {
+          if (e.memberTask.length != 0) {
+            e.memberTask.forEach((e) {
+              _allTasks.add(e.projectTaskName);
+            });
+          }
+        },
+      );
+
+      // _allTasks.forEach((e) {
+      //   _taskLists.add(_buildTaskItem(title: e));
+      // });
+    }
+  }
 
   @override
   void initState() {
+    _loadTasks();
     _loadMissionBloc = BlocProvider.of<LoadMissionBloc>(context);
     super.initState();
   }
@@ -86,7 +105,7 @@ class _MissionDetailsState extends State<MissionDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'ISIG Goma',
+                      '${widget.mission.projectName}',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black87,
@@ -160,7 +179,9 @@ class _MissionDetailsState extends State<MissionDetails> {
                 GestureDetector(
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => ParticipantPage(),
+                      builder: (context) => ParticipantPage(
+                        mission: widget.mission,
+                      ),
                     ),
                   ),
                   child: Container(
@@ -183,7 +204,9 @@ class _MissionDetailsState extends State<MissionDetails> {
                 GestureDetector(
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => TasksPage(),
+                      builder: (context) => TasksPage(
+                        allTasks: _allTasks,
+                      ),
                     ),
                   ),
                   child: Container(
@@ -276,11 +299,14 @@ class _MissionDetailsState extends State<MissionDetails> {
                               ),
                             ),
                             SizedBox(height: 10),
-                            _buildItem(title: 'Nombre de jour', number: '${widget.mission.nbrJours}'),
                             _buildItem(
-                                title: 'Nombre des taches', number: '20'),
+                                title: 'Nombre de jour',
+                                number: '${widget.mission.nbrJours}'),
                             _buildItem(
-                                title: 'Nombre d\'intervenants', number: '${widget.mission.members.length}'),
+                                title: 'Nombre des taches', number: '${_allTasks.length}'),
+                            _buildItem(
+                                title: 'Nombre d\'intervenants',
+                                number: '${widget.mission.members.length}'),
                             // BuildStepper(),
                             Container(
                                 width: MediaQuery.of(context).size.width - 40,
@@ -346,47 +372,6 @@ class _MissionDetailsState extends State<MissionDetails> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildButton() {
-    return Container(
-      padding: EdgeInsets.only(bottom: 20, left: 20, right: 20),
-      alignment: Alignment.bottomCenter,
-      child: Material(
-        elevation: 4,
-        color: Colors.grey[400],
-        borderRadius: BorderRadius.circular(30),
-        child: Container(
-          height: 50,
-          width: MediaQuery.of(context).size.width,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            // color: CustomTheme.redColor,
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: InkWell(
-            // onTap: () => _loginBtnPressed(),
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => AddParticipant(),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.add, color: Colors.white),
-                SizedBox(width: 5),
-                Text(
-                  'Ajouter un participant',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

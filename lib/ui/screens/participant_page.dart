@@ -8,7 +8,7 @@ import 'add_participant_page.dart';
 
 class ParticipantPage extends StatefulWidget {
   final Data mission;
-  const ParticipantPage({this.mission, Key key}) : super(key: key);
+  const ParticipantPage({@required this.mission, Key key}) : super(key: key);
 
   @override
   _ParticipantPageState createState() => _ParticipantPageState();
@@ -52,9 +52,7 @@ class _ParticipantPageState extends State<ParticipantPage> {
                   builder: (context) => AddParticipant(),
                 ),
               ),
-              child: Icon(
-                Icons.group_add,
-              ),
+              child: Icon(Icons.group_add),
             ),
           ],
         ),
@@ -190,7 +188,7 @@ class _ParticipantPageState extends State<ParticipantPage> {
           children: [
             Text('${participant.memberName}', style: TextStyle(fontSize: 14)),
             Text(
-              'Coordonateur directe',
+              '${participant.telephone}',
               style: TextStyle(fontSize: 12),
             ),
           ],

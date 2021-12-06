@@ -1,14 +1,35 @@
+import 'package:ackaton_manage/models/mission/mission_response.dart';
 import 'package:flutter/material.dart';
 import 'add_task_page.dart';
 
 class TasksPage extends StatefulWidget {
-  const TasksPage({Key key}) : super(key: key);
+  // final Data mission;
+  final List<String> allTasks;
+  const TasksPage({@required this.allTasks, Key key}) : super(key: key);
 
   @override
   _TasksPageState createState() => _TasksPageState();
 }
 
 class _TasksPageState extends State<TasksPage> {
+  List<String> _allTasks = [];
+  List<Widget> _taskLists = [];
+  void _loadTasks() {
+    if (widget.allTasks.length != 0) {
+      widget.allTasks.forEach(
+        (e) {
+          _taskLists.add(_buildTaskItem(title: e));
+        },
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    _loadTasks();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +52,7 @@ class _TasksPageState extends State<TasksPage> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton(
-              tooltip: 'Ajouter une tache',
+              tooltip: 'Ajouter une tache}',
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => AddTaskPage(),
@@ -63,7 +84,7 @@ class _TasksPageState extends State<TasksPage> {
               ),
             ),
           ),
-          Text('Tâches')
+          Text('Tâches ${_taskLists.length}')
         ],
       ),
     );
@@ -90,14 +111,7 @@ class _TasksPageState extends State<TasksPage> {
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildTaskItem(title: 'coordination de l\'equipe'),
-                      _buildTaskItem(title: 'recolte des donnees'),
-                      _buildTaskItem(title: 'coordination de l\'equipe'),
-                      _buildTaskItem(title: 'recolte des donnees'),
-                      _buildTaskItem(title: 'coordination de l\'equipe'),
-                      _buildTaskItem(title: 'recolte des donnees'),
-                    ],
+                    children: _taskLists,
                   ),
                 ),
               ),
@@ -153,7 +167,7 @@ class _TasksPageState extends State<TasksPage> {
   Widget _buildTaskItem({String title}) {
     return Container(
       margin: EdgeInsets.only(bottom: 5),
-      width: MediaQuery.of(context).size.width - 40,
+      width: 300,
       decoration: BoxDecoration(
           color: Colors.blue[50], borderRadius: BorderRadius.circular(2)),
       padding: EdgeInsets.symmetric(
