@@ -23,13 +23,12 @@ class _MissionPageState extends State<MissionPage> {
   void initState() {
     _loadMissionBloc = BlocProvider.of<LoadMissionBloc>(context)
       ..add(LoadMissionsLoaded());
-    _loadMissionList();
     super.initState();
   }
 
   void _loadMissionList() {
     GlobalData.missions.forEach((e) {
-      _missionListWwidget.add(_buildMissionItem());
+      _missionListWwidget.add(_buildMissionItem(mission: e));
     });
   }
 
@@ -48,6 +47,7 @@ class _MissionPageState extends State<MissionPage> {
             setState(() {
               isLoading = false;
               GlobalData.missions.addAll(state.missions.data);
+              _loadMissionList();
             });
           }
           if (state is LoadMissionFailure) {
@@ -106,7 +106,9 @@ class _MissionPageState extends State<MissionPage> {
                       Expanded(
                         child: TextField(
                           decoration: InputDecoration.collapsed(
-                              hintText: 'rechercher...'),
+                            hintText:
+                                'rechercher... ${GlobalData.missions.length}',
+                          ),
                         ),
                       ),
                     ],
