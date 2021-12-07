@@ -115,17 +115,40 @@ class _ParticipantPageState extends State<ParticipantPage> {
                 children: [
                   // Text('${widget.mission.members.length}'),
                   Expanded(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 40,
-                      // color: Colors.amber,
-                      padding: EdgeInsets.only(bottom: 20, top: 20),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: _participantWidgetList,
-                        ),
-                      ),
-                    ),
+                    child: _participantWidgetList.length != 0
+                        ? Container(
+                            width: MediaQuery.of(context).size.width - 40,
+                            // color: Colors.amber,
+                            padding: EdgeInsets.only(bottom: 20, top: 20),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: _participantWidgetList,
+                              ),
+                            ),
+                          )
+                        : Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.remove_shopping_cart_outlined,
+                                  color: Colors.blue[50],
+                                  size: 100,
+                                ),
+                                Text(
+                                  "aucun participant\ndiponible",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.blue[50],
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                   ),
                   // _buildButton(context),
                 ],

@@ -1,9 +1,9 @@
-class MissionResponse {
+class A {
   List<Data> data;
 
-  MissionResponse({this.data});
+  A({this.data});
 
-  MissionResponse.fromJson(Map<String, dynamic> json) {
+  A.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
@@ -30,6 +30,7 @@ class Data {
   String endDate;
   int nbrJours;
   List<Members> members;
+  StepperData stepperData;
 
   Data(
       {this.id,
@@ -39,7 +40,8 @@ class Data {
       this.startDate,
       this.endDate,
       this.nbrJours,
-      this.members});
+      this.members,
+      this.stepperData});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -55,6 +57,9 @@ class Data {
         members.add(new Members.fromJson(v));
       });
     }
+    stepperData = json['stepperData'] != null
+        ? new StepperData.fromJson(json['stepperData'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -68,6 +73,9 @@ class Data {
     data['nbrJours'] = this.nbrJours;
     if (this.members != null) {
       data['members'] = this.members.map((v) => v.toJson()).toList();
+    }
+    if (this.stepperData != null) {
+      data['stepperData'] = this.stepperData.toJson();
     }
     return data;
   }
@@ -129,6 +137,108 @@ class MemberTask {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['task_id'] = this.taskId;
+    data['project_task_name'] = this.projectTaskName;
+    data['status'] = this.status;
+    return data;
+  }
+}
+
+class StepperData {
+  A original;
+
+  StepperData({this.original});
+
+  StepperData.fromJson(Map<String, dynamic> json) {
+    original =
+        json['original'] != null ? new A.fromJson(json['original']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.original != null) {
+      data['original'] = this.original.toJson();
+    }
+    return data;
+  }
+}
+
+class Data2 {
+  int stepper;
+  int processId;
+  String description;
+  List<Users> users;
+
+  Data2({this.stepper, this.processId, this.description, this.users});
+
+  Data2.fromJson(Map<String, dynamic> json) {
+    stepper = json['stepper'];
+    processId = json['processId'];
+    description = json['description'];
+    if (json['users'] != null) {
+      users = <Users>[];
+      json['users'].forEach((v) {
+        users.add(new Users.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['stepper'] = this.stepper;
+    data['processId'] = this.processId;
+    data['description'] = this.description;
+    if (this.users != null) {
+      data['users'] = this.users.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Users {
+  String userName;
+  int userId;
+  List<UserTask> userTask;
+
+  Users({this.userName, this.userId, this.userTask});
+
+  Users.fromJson(Map<String, dynamic> json) {
+    userName = json['user_name'];
+    userId = json['user_id'];
+    if (json['userTask'] != null) {
+      userTask =<UserTask>[];
+      json['userTask'].forEach((v) {
+        userTask.add(new UserTask.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['user_name'] = this.userName;
+    data['user_id'] = this.userId;
+    if (this.userTask != null) {
+      data['userTask'] = this.userTask.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class UserTask {
+  int projectTaskId;
+  String projectTaskName;
+  int status;
+
+  UserTask({this.projectTaskId, this.projectTaskName, this.status});
+
+  UserTask.fromJson(Map<String, dynamic> json) {
+    projectTaskId = json['project_task_id'];
+    projectTaskName = json['project_task_name'];
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['project_task_id'] = this.projectTaskId;
     data['project_task_name'] = this.projectTaskName;
     data['status'] = this.status;
     return data;

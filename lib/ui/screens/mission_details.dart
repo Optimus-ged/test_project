@@ -28,7 +28,6 @@ class _MissionDetailsState extends State<MissionDetails> {
         (e) {
           if (e.memberTask.length != 0) {
             e.memberTask.forEach((e) {
-              
               _allTasks.add(e.projectTaskName);
             });
           }
@@ -305,11 +304,27 @@ class _MissionDetailsState extends State<MissionDetails> {
                                 title: 'Nombre de jour',
                                 number: ' ${widget.mission.nbrJours}'),
                             _buildItem(
-                                title: 'Nombre des taches',
-                                number: '${_allTasks.length}'),
+                              title: 'Nombre des taches',
+                              number: '${_allTasks.length}',
+                               onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => TasksPage(
+                                    allTasks: _allTasks,
+                                  ),
+                                ),
+                              ),
+                            ),
                             _buildItem(
-                                title: 'Nombre d\'intervenants',
-                                number: '${widget.mission.members.length}'),
+                              title: 'Nombre de participants',
+                              number: '${widget.mission.members.length}',
+                               onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ParticipantPage(
+                                    mission: widget.mission,
+                                  ),
+                                ),
+                              ),
+                            ),
                             // BuildStepper(),
                             Container(
                                 width: MediaQuery.of(context).size.width - 40,
@@ -343,38 +358,41 @@ class _MissionDetailsState extends State<MissionDetails> {
     );
   }
 
-  Widget _buildItem({String title, number}) {
-    return Container(
-      width: MediaQuery.of(context).size.width - 40,
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      margin: EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(
-        color: Colors.grey[50],
-        border: Border(
-          left: BorderSide(width: 4, color: Colors.blue[50]),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            child: Text(
-              '$title',
-              style: TextStyle(
-                  // fontSize: 12,
-                  ),
-            ),
+  Widget _buildItem({String title, number, VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: MediaQuery.of(context).size.width - 40,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        margin: EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          color: Colors.grey[50],
+          border: Border(
+            left: BorderSide(width: 4, color: Colors.blue[50]),
           ),
-          Container(
-            child: Text(
-              '$number',
-              style: TextStyle(
-                // fontSize: 12,
-                fontWeight: FontWeight.w600,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: Text(
+                '$title',
+                style: TextStyle(
+                    // fontSize: 12,
+                    ),
               ),
             ),
-          ),
-        ],
+            Container(
+              child: Text(
+                '$number',
+                style: TextStyle(
+                  // fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
