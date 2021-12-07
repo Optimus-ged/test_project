@@ -18,7 +18,7 @@ class CreateProcessBloc extends Bloc<CreateProcessEvent, CreateProcessState> {
       yield CreateProcessInProgress();
       final process = await dataRepository.createProcess(event.submitData);
       if (process.data != null) {
-        yield CreateProcessSuccess(processData: process.data);
+        yield CreateProcessSuccess(processData: process);
       } else {
         yield CreateProcessFailure(message: 'erreur');
       }

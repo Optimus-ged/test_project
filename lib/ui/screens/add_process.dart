@@ -47,7 +47,6 @@ class AddProcess extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context) {
-    var _description = TextEditingController();
     return Expanded(
       child: Container(
         padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
@@ -63,17 +62,30 @@ class AddProcess extends StatelessWidget {
             Expanded(
               child: Container(
                 width: MediaQuery.of(context).size.width - 40,
-                // color: Colors.amber,
                 padding: EdgeInsets.only(bottom: 20, top: 20),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _loginInput(
-                        color: Colors.blue[50],
-                        hint: 'description',
-                        controller: _description,
+                      _buildItem(
+                        context,
+                        title: 'qqq',
+                        number: '22',
+                        onTap: () {},
                       ),
+                      _buildItem(
+                        context,
+                        title: 'qqq',
+                        number: '22',
+                        onTap: () {},
+                      ),
+                      _buildItem(
+                        context,
+                        title: 'qqq',
+                        number: '22',
+                        onTap: () {},
+                      ),
+                     
                     ],
                   ),
                 ),
@@ -86,51 +98,40 @@ class AddProcess extends StatelessWidget {
     );
   }
 
-  Widget _loginInput(
-      {Color color,
-      String hint,
-      bool isPassword = false,
-      bool isLogin = false,
-      VoidCallback onTap,
-      TextEditingController controller}) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
+  Widget _buildItem(BuildContext context,
+      {String title, number, VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
       child: Container(
-        height: 55,
-        alignment: Alignment.center,
-        padding: EdgeInsets.only(left: 15, right: !isPassword ? 15 : 0),
+        width: MediaQuery.of(context).size.width - 40,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        margin: EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(10),
+          color: Colors.grey[50],
+          border: Border(
+            left: BorderSide(width: 4, color: Colors.blue[50]),
+          ),
         ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: TextField(
-                controller: controller,
-                obscureText: isLogin,
-                style: TextStyle(fontWeight: FontWeight.w600),
-                decoration: InputDecoration.collapsed(
-                  hintText: '$hint',
-                  hintStyle: TextStyle(
-                    fontWeight: FontWeight.normal,
-                  ),
+            Container(
+              child: Text(
+                '$title',
+                style: TextStyle(
+                    // fontSize: 12,
+                    ),
+              ),
+            ),
+            Container(
+              child: Text(
+                '$number',
+                style: TextStyle(
+                  // fontSize: 12,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-            if (isPassword)
-              InkWell(
-                onTap: onTap,
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Icon(
-                      Icons.remove_red_eye_sharp,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-              )
           ],
         ),
       ),
