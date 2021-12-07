@@ -306,7 +306,7 @@ class _MissionDetailsState extends State<MissionDetails> {
                             _buildItem(
                               title: 'Nombre des taches',
                               number: '${_allTasks.length}',
-                               onTap: () => Navigator.of(context).push(
+                              onTap: () => Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => TasksPage(
                                     allTasks: _allTasks,
@@ -317,7 +317,7 @@ class _MissionDetailsState extends State<MissionDetails> {
                             _buildItem(
                               title: 'Nombre de participants',
                               number: '${widget.mission.members.length}',
-                               onTap: () => Navigator.of(context).push(
+                              onTap: () => Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ParticipantPage(
                                     mission: widget.mission,
@@ -327,20 +327,23 @@ class _MissionDetailsState extends State<MissionDetails> {
                             ),
                             // BuildStepper(),
                             Container(
-                                width: MediaQuery.of(context).size.width - 40,
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 10),
-                                margin: EdgeInsets.only(bottom: 10),
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[50],
-                                  borderRadius: BorderRadius.circular(2),
-                                  // border: Border(
+                              width: MediaQuery.of(context).size.width - 40,
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
+                              margin: EdgeInsets.only(bottom: 10),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[50],
+                                borderRadius: BorderRadius.circular(2),
+                                // border: Border(
 
-                                  //   left:
-                                  //       BorderSide(width: 4, color: Colors.blue[50]),
-                                  // ),
-                                ),
-                                child: BuildStepper())
+                                //   left:
+                                //       BorderSide(width: 4, color: Colors.blue[50]),
+                                // ),
+                              ),
+                              child: BuildStepper(
+                                mission: widget.mission,
+                              ),
+                            ),
                           ],
                         ),
                       ),

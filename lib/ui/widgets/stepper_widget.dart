@@ -1,8 +1,14 @@
+import 'package:ackaton_manage/models/mission/mission_response.dart';
 import 'package:flutter/material.dart';
 
 class BuildStepper extends StatefulWidget {
   final int level;
-  const BuildStepper({Key key, this.level}) : super(key: key);
+  final Data mission;
+  const BuildStepper({
+    Key key,
+    @required this.mission,
+    this.level,
+  }) : super(key: key);
 
   @override
   _BuildStepperState createState() => _BuildStepperState();
@@ -27,16 +33,31 @@ class _BuildStepperState extends State<BuildStepper> {
         ),
         SizedBox(height: 10),
         Container(
-          child: Column(
-            children: [
-              _buildStepperItem(closed: false, title: 'Préparation ', state: 1),
-              _buildStepperItem(closed: false, title: 'Exécution', state: 1),
-              _buildStepperItem(closed: false, title: 'Nettoyage', state: 1),
-              _buildStepperItem(closed: false, title: 'Analyse', state: 1),
-              _buildStepperItem(closed: true, title: 'Rapport', state: 1),
-              _buildStepperItem(closed: true, title: 'Presentation', state: 1),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: widget.mission.stepperData.original.data2
+                  .map(
+                    (e) => _buildStepperItem(
+                      closed: false,
+                      title: '${e.description}',
+                      state: 3,
+                      participant: e.users,
+                    ),
+                  )
+                  .toList(),
+            ),
           ),
+          // child: Column(
+          //   children: [
+
+          //     // _buildStepperItem(closed: false, title: 'Préparation ', state: 1),
+          //     // _buildStepperItem(closed: false, title: 'Exécution', state: 1),
+          //     // _buildStepperItem(closed: false, title: 'Nettoyage', state: 1),
+          //     // _buildStepperItem(closed: false, title: 'Analyse', state: 1),
+          //     // _buildStepperItem(closed: true, title: 'Rapport', state: 1),
+          //     // _buildStepperItem(closed: true, title: 'Presentation', state: 1),
+          //   ],
+          // ),
         ),
       ],
     );
@@ -56,8 +77,12 @@ class _BuildStepperState extends State<BuildStepper> {
     if (_currentStep > 0) setState(() => _currentStep -= 1);
   }
 
-  Widget _buildStepperItem(
-      {@required bool closed, @required String title, @required int state}) {
+  Widget _buildStepperItem({
+    @required bool closed,
+    @required List<Users> participant,
+    @required String title,
+    @required int state,
+  }) {
     return Container(
       decoration: BoxDecoration(
           color: Colors.blue[50], borderRadius: BorderRadius.circular(2)),
@@ -114,23 +139,22 @@ class _BuildStepperState extends State<BuildStepper> {
                               closed ? 'Ouvrir' : 'Fermé ',
                               style: TextStyle(
                                   fontSize: 12,
-                                  color: closed ? Colors.red : Colors.blue,// Colors.black87,
+                                  color: closed
+                                      ? Colors.red
+                                      : Colors.blue, // Colors.black87,
                                   decoration: TextDecoration.underline),
                             ),
                           )
                       ],
                     ),
                   ),
-                  if (state == 2 || state == 3)
-                    Container(
-                      // height: 50,
-                      child: Column(
-                        children: [
-                          _buildParticipant(),
-                          _buildParticipant(),
-                        ],
-                      ),
-                    )
+                  Container(
+                    // height: 50,
+                    child: Column(
+                        children: participant
+                            .map((e) => _buildParticipant(e))
+                            .toList()),
+                  )
                 ],
               ),
             ),
@@ -140,7 +164,7 @@ class _BuildStepperState extends State<BuildStepper> {
     );
   }
 
-  Widget _buildParticipant() {
+  Widget _buildParticipant(Users participant) {
     return ListTile(
       minVerticalPadding: 10,
       horizontalTitleGap: 10,
@@ -148,17 +172,19 @@ class _BuildStepperState extends State<BuildStepper> {
       leading: CircleAvatar(
         radius: 18,
         backgroundColor: Colors.blue[50],
-        backgroundImage: AssetImage('assets/images/person.jpg'),
+        backgroundImage: AssetImage('assets/images/noAvatar.png'),
         // child: Icon(Icons.person),
       ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Optimus Ged', style: TextStyle(fontSize: 14)),
-          Text(
-            'Coordonateur directe',
-            style: TextStyle(fontSize: 12),
-          ),
+          Text('${participant.userName}', style: TextStyle(fontSize: 14)),
+          ...participant.userTask
+              .map((e) => Text(
+                    '${e.projectTaskName}',
+                    style: TextStyle(fontSize: 11),
+                  ))
+              .toList(),
         ],
       ),
     );

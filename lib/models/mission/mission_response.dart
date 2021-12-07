@@ -1,9 +1,9 @@
-class A {
+class MissionResponse {
   List<Data> data;
 
-  A({this.data});
+  MissionResponse({this.data});
 
-  A.fromJson(Map<String, dynamic> json) {
+  MissionResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
@@ -144,19 +144,44 @@ class MemberTask {
 }
 
 class StepperData {
-  A original;
+  Original original;
 
   StepperData({this.original});
 
   StepperData.fromJson(Map<String, dynamic> json) {
-    original =
-        json['original'] != null ? new A.fromJson(json['original']) : null;
+    original = json['original'] != null
+        ? new Original.fromJson(json['original'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+
     if (this.original != null) {
       data['original'] = this.original.toJson();
+    }
+    return data;
+  }
+}
+
+class Original {
+  List<Data2> data2;
+
+  Original({this.data2});
+
+  Original.fromJson(Map<String, dynamic> json) {
+    if (json['data2'] != null) {
+      data2 = <Data2>[];
+      json['data2'].forEach((v) {
+        data2.add(new Data2.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data2 != null) {
+      data['data2'] = this.data2.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -167,8 +192,14 @@ class Data2 {
   int processId;
   String description;
   List<Users> users;
+  int percent;
 
-  Data2({this.stepper, this.processId, this.description, this.users});
+  Data2(
+      {this.stepper,
+      this.processId,
+      this.description,
+      this.users,
+      this.percent});
 
   Data2.fromJson(Map<String, dynamic> json) {
     stepper = json['stepper'];
@@ -180,6 +211,7 @@ class Data2 {
         users.add(new Users.fromJson(v));
       });
     }
+    percent = json['percent'];
   }
 
   Map<String, dynamic> toJson() {
@@ -190,6 +222,7 @@ class Data2 {
     if (this.users != null) {
       data['users'] = this.users.map((v) => v.toJson()).toList();
     }
+    data['percent'] = this.percent;
     return data;
   }
 }
@@ -205,7 +238,7 @@ class Users {
     userName = json['user_name'];
     userId = json['user_id'];
     if (json['userTask'] != null) {
-      userTask =<UserTask>[];
+      userTask = <UserTask>[];
       json['userTask'].forEach((v) {
         userTask.add(new UserTask.fromJson(v));
       });
