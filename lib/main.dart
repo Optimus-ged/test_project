@@ -1,5 +1,6 @@
 import 'package:ackaton_manage/bloc/create_task_bloc/create_task_bloc.dart';
 import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
+import 'package:ackaton_manage/bloc/process_bloc/process_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +29,9 @@ void main() async {
           providers: [
             BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
             BlocProvider<CreateTaskBloc>(create: (context) => CreateTaskBloc()),
+            BlocProvider<CreateProcessBloc>(
+              create: (context) => CreateProcessBloc(),
+            ),
             BlocProvider<CreateParticipantBloc>(
               create: (context) => CreateParticipantBloc(),
             ),

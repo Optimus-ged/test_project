@@ -1,8 +1,9 @@
+import 'package:ackaton_manage/ui/widgets/create_process_btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddProcess extends StatelessWidget {
-  const AddProcess({ Key key }) : super(key: key);
+  const AddProcess({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,7 @@ class AddProcess extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context) {
+    var _description = TextEditingController();
     return Expanded(
       child: Container(
         padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
@@ -67,7 +69,11 @@ class AddProcess extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _loginInput(color: Colors.blue[50], hint: 'Denomination'),
+                      _loginInput(
+                        color: Colors.blue[50],
+                        hint: 'description',
+                        controller: _description,
+                      ),
                     ],
                   ),
                 ),
@@ -130,7 +136,4 @@ class AddProcess extends StatelessWidget {
       ),
     );
   }
-
-  
 }
-
