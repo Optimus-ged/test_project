@@ -38,3 +38,21 @@ class HeroDialogRoute<T> extends PageRoute<T> {
   @override
   String get barrierLabel => null;
 }
+
+class ConstrainedView extends StatelessWidget {
+  final Widget child;
+  final double width;
+  const ConstrainedView({this.child, this.width = 250, key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 250) {
+          return Text('');
+        }
+        return child;
+      },
+    );
+  }
+}
