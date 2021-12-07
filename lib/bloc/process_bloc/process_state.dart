@@ -1,33 +1,33 @@
-import 'package:ackaton_manage/models/mission/mission_response.dart';
-import 'package:equatable/equatable.dart';
+import 'package:ackaton_manage/models/process/process_response.dart';
 import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
 
 @immutable
-abstract class LoadProcessState extends Equatable {
-  const LoadProcessState();
+abstract class CreateProcessState extends Equatable {
+  const CreateProcessState();
 
   @override
   List<Object> get props => [];
 }
 
-class LoadProcessInitial extends LoadProcessState {}
+class CreateProcessInitial extends CreateProcessState {}
 
-class LoadProcessInProgress extends LoadProcessState {}
+class CreateProcessInProgress extends CreateProcessState {}
 
-class LoadProcessFailure extends LoadProcessState {
+class CreateProcessFailure extends CreateProcessState {
   final String message;
 
-  const LoadProcessFailure({@required this.message});
+  const CreateProcessFailure({@required this.message});
 
   @override
   List<Object> get props => [message];
 }
 
-class LoadProcessSuccess extends LoadProcessState {
-  final MissionResponse missions;
+class CreateProcessSuccess extends CreateProcessState {
+  final CreateProcessResponse processData;
 
-  const LoadProcessSuccess({@required this.missions});
+  const CreateProcessSuccess({@required this.processData});
 
   @override
-  List<Object> get props => [missions];
+  List<Object> get props => [processData];
 }
