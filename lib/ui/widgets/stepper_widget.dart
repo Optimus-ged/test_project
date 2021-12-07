@@ -180,9 +180,21 @@ class _BuildStepperState extends State<BuildStepper> {
         children: [
           Text('${participant.userName}', style: TextStyle(fontSize: 14)),
           ...participant.userTask
-              .map((e) => Text(
-                    '${e.projectTaskName}',
-                    style: TextStyle(fontSize: 11),
+              .map((e) => Row(
+                    children: [
+                      e.status == 1
+                          ? Icon(Icons.verified, color: Colors.blue, size: 10)
+                          : Icon(
+                              Icons.cancel_outlined,
+                              color: Colors.red,
+                              size: 10,
+                            ),
+                      SizedBox(width: 5),
+                      Text(
+                        '${e.projectTaskName}',
+                        style: TextStyle(fontSize: 10),
+                      ),
+                    ],
                   ))
               .toList(),
         ],

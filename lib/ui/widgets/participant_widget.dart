@@ -134,7 +134,8 @@ class ParticipantDialog extends StatelessWidget {
                                   ),
                                   Container(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           'Taches :',
@@ -144,16 +145,24 @@ class ParticipantDialog extends StatelessWidget {
                                           child: Column(
                                             children: participant.memberTask
                                                 .map((e) => Padding(
-                                                  padding: const EdgeInsets.only(left: 20),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                    children: [
-                                                      Icon(Icons.topic_rounded, size: 15,),
-                                                      SizedBox(width: 5),
-                                                      Text('${e.projectTaskName}'),
-                                                    ],
-                                                  ),
-                                                ))
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 20),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.topic_rounded,
+                                                            size: 15,
+                                                          ),
+                                                          SizedBox(width: 5),
+                                                          Text(
+                                                              '${e.projectTaskName}'),
+                                                        ],
+                                                      ),
+                                                    ))
                                                 .toList(),
                                           ),
                                         )
