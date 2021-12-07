@@ -47,17 +47,6 @@ class _BuildStepperState extends State<BuildStepper> {
                   .toList(),
             ),
           ),
-          // child: Column(
-          //   children: [
-
-          //     // _buildStepperItem(closed: false, title: 'Préparation ', state: 1),
-          //     // _buildStepperItem(closed: false, title: 'Exécution', state: 1),
-          //     // _buildStepperItem(closed: false, title: 'Nettoyage', state: 1),
-          //     // _buildStepperItem(closed: false, title: 'Analyse', state: 1),
-          //     // _buildStepperItem(closed: true, title: 'Rapport', state: 1),
-          //     // _buildStepperItem(closed: true, title: 'Presentation', state: 1),
-          //   ],
-          // ),
         ),
       ],
     );
@@ -180,184 +169,27 @@ class _BuildStepperState extends State<BuildStepper> {
         children: [
           Text('${participant.userName}', style: TextStyle(fontSize: 14)),
           ...participant.userTask
-              .map((e) => Row(
-                    children: [
-                      e.status == 1
-                          ? Icon(Icons.verified, color: Colors.blue, size: 10)
-                          : Icon(
-                              Icons.cancel_outlined,
-                              color: Colors.red,
-                              size: 10,
-                            ),
-                      SizedBox(width: 5),
-                      Text(
-                        '${e.projectTaskName}',
-                        style: TextStyle(fontSize: 10),
-                      ),
-                    ],
-                  ))
+              .map(
+                (e) => Row(
+                  children: [
+                    e.status == 1
+                        ? Icon(Icons.verified, color: Colors.blue, size: 10)
+                        : Icon(
+                            Icons.cancel_outlined,
+                            color: Colors.red,
+                            size: 10,
+                          ),
+                    SizedBox(width: 5),
+                    Text(
+                      '${e.projectTaskName}',
+                      style: TextStyle(fontSize: 10),
+                    ),
+                  ],
+                ),
+              )
               .toList(),
         ],
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-// return Container(
-    //   child: Column(
-    //     children: [
-    //       Stepper(
-    //         type: _stepperType,
-    //         currentStep: _currentStep,
-    //         physics: ScrollPhysics(),
-    //         onStepTapped: (step) => tapped(step),
-    //         onStepContinue: continued,
-    //         onStepCancel: canceled,
-    //         steps: <Step>[
-    //           Step(
-    //             title: Text(
-    //               "Preparation",
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             content: Text(
-    //               'Le projet est en cours de preparation',
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             isActive: _currentStep >= 0,
-    //             state:
-    //                 _currentStep >= 0 ? StepState.complete : StepState.disabled,
-    //           ),
-    //           Step(
-    //             title: Text(
-    //               "Execution",
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             content: Text(
-    //               'Le projet est en cours d\execution',
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             isActive: _currentStep >= 0,
-    //             state:
-    //                 _currentStep >= 1 ? StepState.complete : StepState.disabled,
-    //           ),
-    //           Step(
-    //             title: Text(
-    //               "Netoyage",
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             content: Text(
-    //               'Le projet est en cours de netoyage',
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             isActive: _currentStep >= 0,
-    //             state:
-    //                 _currentStep >= 2 ? StepState.complete : StepState.disabled,
-    //           ),
-    //           Step(
-    //             title: Text(
-    //               "Analyse",
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             content: Text(
-    //               'Le projet est en cours d\'analyse',
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             isActive: _currentStep >= 0,
-    //             state:
-    //                 _currentStep >= 3 ? StepState.complete : StepState.disabled,
-    //           ),
-    //           Step(
-    //             title: Text(
-    //               "Rapport",
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             content: Text(
-    //               'Rapport en cours d\'edition',
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             isActive: _currentStep >= 0,
-    //             state:
-    //                 _currentStep >= 4 ? StepState.complete : StepState.disabled,
-    //           ),
-    //           Step(
-    //             title: Text(
-    //               "Presentation",
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             content: Text(
-    //               'Presentation en cours',
-    //               style: TextStyle(fontSize: 12),
-    //             ),
-    //             isActive: _currentStep >= 0,
-    //             state:
-    //                 _currentStep >= 5 ? StepState.complete : StepState.disabled,
-    //           ),
-    //         ],
-    //       ),
-    //     ],
-    //   ),
-    // );
-
-    // return Container(
-    //     child: Stepper(
-    //   steps: [
-    //     Step(
-    //         title: Text("Task-1"),
-    //         content: Text(""),
-    //         subtitle: Text("Compled"),
-    //         isActive: true,
-    //         state: StepState.complete),
-    //     Step(
-    //         title: Text("Task-2"),
-    //         content: Text(""),
-    //         subtitle: Text("Compled"),
-    //         isActive: true,
-    //         state: StepState.complete),
-    //     Step(
-    //         title: Text("Task-3"),
-    //         content: Text(""),
-    //         subtitle: Text("Compled"),
-    //         isActive: true,
-    //         state: StepState.disabled),
-    //     Step(
-    //         title: Text("Task-4"),
-    //         content: Text(""),
-    //         subtitle: Text("Compled"),
-    //         isActive: true,
-    //         state: StepState.editing),
-    //     Step(
-    //         title: Text("Task-5"),
-    //         content: Text(""),
-    //         subtitle: Text("Compled"),
-    //         isActive: true,
-    //         state: StepState.error),
-    //     Step(
-    //         title: Text("Task-6"),
-    //         content: Text(""),
-    //         subtitle: Text("Compled"),
-    //         isActive: true,
-    //         state: StepState.complete),
-    //     Step(
-    //         title: Text("Task-7"),
-    //         content: Text(""),
-    //         subtitle: Text("Compled"),
-    //         isActive: true,
-    //         state: StepState.complete),
-    //   ],
-    //   currentStep: _index,
-    //   onStepTapped: (index) {
-    //     setState(() {
-    //       _index = index;
-    //     });
-    //   },
-    //   controlsBuilder: (BuildContext context,
-    //           {VoidCallback onStepContinue, VoidCallback onStepCancel}) =>
-    //       Container(),
-    // ))

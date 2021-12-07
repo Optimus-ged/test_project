@@ -1,4 +1,5 @@
 import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
+import 'package:ackaton_manage/bloc/mission_bloc/mission_events.dart';
 import 'package:ackaton_manage/bloc/mission_bloc/mission_state.dart';
 import 'package:ackaton_manage/constants/theme.dart';
 import 'package:ackaton_manage/models/mission/mission_response.dart';
@@ -33,10 +34,6 @@ class _MissionDetailsState extends State<MissionDetails> {
           }
         },
       );
-
-      // _allTasks.forEach((e) {
-      //   _taskLists.add(_buildTaskItem(title: e));
-      // });
     }
   }
 
@@ -155,11 +152,7 @@ class _MissionDetailsState extends State<MissionDetails> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => AddAffectation(),
-                    ),
-                  ),
+                  onTap: () => _loadMissionBloc..add(LoadMissionsLoaded()),
                   child: Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -170,12 +163,33 @@ class _MissionDetailsState extends State<MissionDetails> {
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     child: Row(
                       children: [
-                        Icon(Icons.menu_open_rounded, size: 18),
-                        // Text('Participants'),
+                        Icon(Icons.refresh, size: 18),
                       ],
                     ),
                   ),
                 ),
+                // GestureDetector(
+                //   onTap: () => Navigator.of(context).push(
+                //     MaterialPageRoute(
+                //       builder: (context) => AddAffectation(),
+                //     ),
+                //   ),
+                //   child: Container(
+                //     decoration: BoxDecoration(
+                //       shape: BoxShape.circle,
+                //       color: Colors.blue.withOpacity(
+                //         0.09,
+                //       ),
+                //     ),
+                //     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                //     child: Row(
+                //       children: [
+                //         Icon(Icons.menu_open_rounded, size: 18),
+                //         // Text('Participants'),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 // Spacer(),
                 GestureDetector(
                   onTap: () => Navigator.of(context).push(
@@ -238,6 +252,14 @@ class _MissionDetailsState extends State<MissionDetails> {
     return BlocBuilder<LoadMissionBloc, LoadMissionState>(
       bloc: _loadMissionBloc,
       builder: (context, state) {
+        if (state is LoadMissionInProgress) {
+          return Column(
+            children: [
+              SizedBox(height: 100),
+              CircularProgressIndicator(),
+            ],
+          );
+        }
         if (state is LoadMissionSuccess) {
           return Expanded(
             child: Container(
