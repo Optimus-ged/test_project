@@ -1,5 +1,6 @@
 import 'package:ackaton_manage/data/dio/interceptors.dart';
 import 'package:ackaton_manage/models/mission/mission_response.dart';
+import 'package:ackaton_manage/models/process/load_process_response.dart';
 import 'package:ackaton_manage/models/process/process_model.dart';
 import 'package:ackaton_manage/models/process/process_response.dart';
 import 'package:dio/dio.dart';
@@ -46,6 +47,13 @@ class DataRepository {
       "/get_project_list",
     );
     return MissionResponse.fromJson(result.data);
+  }
+
+  Future<LoadProcessResponse> getAllProcesss() async {
+    final result = await _dio.get(
+      "/get_project_list",
+    );
+    return LoadProcessResponse.fromJson(result.data);
   }
 
   Future<CreateProcessResponse> createProcess(
