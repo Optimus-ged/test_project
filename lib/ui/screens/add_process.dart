@@ -73,7 +73,7 @@ class AddProcess extends StatelessWidget {
                 ),
               ),
             ),
-            _buildButton(context),
+            BuildButton(),
           ],
         ),
       ),
@@ -131,40 +131,6 @@ class AddProcess extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(bottom: 0, left: 20, right: 20),
-      alignment: Alignment.bottomCenter,
-      child: Material(
-        elevation: 4,
-        color: Colors.grey[400],
-        borderRadius: BorderRadius.circular(30),
-        child: Container(
-          height: 50,
-          width: MediaQuery.of(context).size.width,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            // color: CustomTheme.redColor,
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: InkWell(
-            // onTap: () => _loginBtnPressed(),
-            onTap: () {},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Icon(Icons.save, color: Colors.white),
-                // SizedBox(width: 5),
-                Text(
-                  'Enregistrer',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  
 }
+

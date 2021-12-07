@@ -41,32 +41,6 @@ class DataRepository {
   //   return SignupResponse.fromJson(result.data);
   // }
 
-  // Update contribuable
-  // Future<SignupResponse> updateContribuable(
-  //   ProfileSubmit profileSubmit,
-  //   String id,
-  //   File file,
-  // ) async {
-  //   String fileName = file.path.split('/').last;
-  //   FormData _formData = FormData.fromMap({
-  //     ...profileSubmit.toJson(),
-  //     "photo": await MultipartFile.fromFile(file.path, filename: fileName),
-  //   });
-  //   final result = await _dio.put(
-  //     "/contribuable/update/$id",
-  //     data: _formData,
-  //   );
-  //   return SignupResponse.fromJson(result.data);
-  // }
-
-  // Future<PayTaxeResponse> payTaxe(PayTaxeSubmit submitData) async {
-  //   final result = await _dio.post(
-  //     "/declaration/add",
-  //     data: submitData.toJson()
-  //   );
-  //   return PayTaxeResponse.fromJson(result.data);
-  // }
-
   Future<MissionResponse> getAllMissions() async {
     final result = await _dio.get(
       "/get_project_list",
