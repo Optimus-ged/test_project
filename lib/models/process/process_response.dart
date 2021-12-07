@@ -1,1 +1,1 @@
-class CreateProcessResponse{}
+class CreateProcessResponse {}

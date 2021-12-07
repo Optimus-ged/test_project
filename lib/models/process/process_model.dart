@@ -1,1 +1,1 @@
-class CreateProcessSubmit{}
+class CreateProcessSubmit {}
