@@ -1,6 +1,7 @@
 import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
 import 'package:ackaton_manage/bloc/mission_bloc/mission_state.dart';
 import 'package:ackaton_manage/models/mission/mission_response.dart';
+import 'package:ackaton_manage/ui/widgets/custom_rect_tween.dart';
 import 'package:ackaton_manage/ui/widgets/hero_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +28,7 @@ class _ParticipantPageState extends State<ParticipantPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
+    // Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         color: Colors.blue[50],
@@ -91,11 +92,9 @@ class _ParticipantPageState extends State<ParticipantPage> {
         if (state is LoadMissionSuccess) {
           // Traitments
           widget.mission.members.forEach((e) {
+            _participantWidgetList.clear();
             _participantWidgetList.add(
-              _participantItem(
-                e,
-                MediaQuery.of(context).size,
-              ),
+              _participantItem(e, MediaQuery.of(context).size),
             );
           });
 
@@ -140,7 +139,7 @@ class _ParticipantPageState extends State<ParticipantPage> {
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
-        new HeroDialogRoute(
+        HeroDialogRoute(
           builder: (BuildContext context) {
             return Padding(
               padding: EdgeInsets.only(
@@ -148,6 +147,8 @@ class _ParticipantPageState extends State<ParticipantPage> {
                 right: screenSize.width * .15,
                 bottom: screenSize.height * .20,
               ),
+              // child: ParticipantDialog(participant: participant),
+
               child: AlertDialog(
                 backgroundColor: Colors.transparent,
                 actionsPadding: EdgeInsets.all(0),
@@ -159,87 +160,150 @@ class _ParticipantPageState extends State<ParticipantPage> {
                 content: Builder(
                   builder: (context) => Hero(
                     tag: '${participant.memberId}',
-                    child: new Container(
-                      height: 300.0,
-                      width: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        // image: DecorationImage(
-                        //   image: AssetImage(
-                        //     '$photo',
-                        //   ),
-                        //   fit: BoxFit.cover,
-                        // ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Material(
-                            color: Colors.transparent,
+                    createRectTween: (begin, end) => CustomRectTween(
+                      begin: begin,
+                      end: end,
+                    ),
+                    child: SingleChildScrollView(
+                      child: Center(
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Center(
                             child: Container(
-                              alignment: Alignment.centerLeft,
-                              color: Colors.black.withOpacity(0.3),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 7),
-                                child: Text(
-                                  'eee',
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                  ),
+                              height: 370,
+                              width: 250,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                  colors: [Colors.blue[300], Colors.blue[50]],
                                 ),
                               ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.bottomCenter,
-                                      end: Alignment.topCenter,
-                                      colors: [
-                                        Colors.black54,
-                                        Colors.transparent,
-                                      ],
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    height: 25,
+                                    width: 250,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.9),
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(10),
+                                            topRight: Radius.circular(10),
+                                            bottomLeft: Radius.circular(20),
+                                            bottomRight: Radius.circular(20)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Colors.black26,
+                                              blurRadius: 7,
+                                              offset: Offset(0, 4))
+                                        ]),
+                                    child: Text(
+                                      'participant',
+                                      // '$heureDepart',
+                                      style: TextStyle(
+                                        color: Colors.black.withOpacity(0.8),
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.message,
-                                          color: Colors.white70,
-                                        ),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          'Message',
-                                          style: TextStyle(
-                                            color: Colors.white70,
+                                  SizedBox(height: 20),
+                                  CircleAvatar(
+                                    radius: 50,
+                                    backgroundColor: Colors.blue[50],
+                                    backgroundImage:
+                                        AssetImage('assets/images/person.jpg'),
+                                    // child: Icon(Icons.person),
+                                  ),
+                                  Container(
+                                    // color: Colors.red,
+                                    padding: EdgeInsets.only(left: 30, top: 20),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Nom :  ',
+                                                  style: titleStyle()),
+                                              SizedBox(
+                                                // width: 178,
+                                                child: Text(
+                                                  'name goes here',
+                                                  style: contentStyle(),
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                        ),
-                                      ],
+                                          Row(
+                                            children: [
+                                              Text('Téléphone :  ',
+                                                  style: titleStyle()),
+                                              Text(
+                                                'telephone',
+                                                style: contentStyle(),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Email :  ',
+                                                  style: titleStyle()),
+                                              SizedBox(
+                                                // width: 150,
+                                                child: Text(
+                                                  'mail',
+                                                  style: contentStyle(),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Id Agent :  ',
+                                                  style: titleStyle()),
+                                              SizedBox(
+                                                // width: 150,
+                                                child: Text(
+                                                  'id',
+                                                  style: contentStyle(),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Genre : ',
+                                                style: titleStyle(),
+                                              ),
+                                              Text(
+                                                'Homme',
+                                                style: contentStyle(),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
                             ),
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             );
+            // child: ;
           },
         ),
       ),
@@ -249,11 +313,14 @@ class _ParticipantPageState extends State<ParticipantPage> {
           minVerticalPadding: 10,
           horizontalTitleGap: 10,
           contentPadding: EdgeInsets.only(bottom: 10),
-          leading: CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.blue[50],
-            backgroundImage: AssetImage('assets/images/person.jpg'),
-            // child: Icon(Icons.person),
+          leading: Hero(
+            tag: '${participant.memberId}',
+            child: CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.blue[50],
+              backgroundImage: AssetImage('assets/images/person.jpg'),
+              // child: Icon(Icons.person),
+            ),
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -268,5 +335,14 @@ class _ParticipantPageState extends State<ParticipantPage> {
         ),
       ),
     );
+  }
+
+  TextStyle titleStyle() {
+    return TextStyle(
+        fontWeight: FontWeight.bold, fontSize: 13, color: Colors.black87);
+  }
+
+  TextStyle contentStyle() {
+    return TextStyle(fontSize: 13, color: Colors.black87);
   }
 }

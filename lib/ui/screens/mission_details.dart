@@ -27,6 +27,7 @@ class _MissionDetailsState extends State<MissionDetails> {
         (e) {
           if (e.memberTask.length != 0) {
             e.memberTask.forEach((e) {
+              _allTasks.clear();
               _allTasks.add(e.projectTaskName);
             });
           }
