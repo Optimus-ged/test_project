@@ -1,12 +1,21 @@
-import 'package:equatable/equatable.dart';
+import 'package:ackaton_manage/models/process/process_model.dart';
 import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
 
 @immutable
-abstract class ProcessEvent extends Equatable {
-  const ProcessEvent();
+abstract class CreateProcessEvent extends Equatable {
+  const CreateProcessEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class LoadedProcess extends ProcessEvent {}
+class CreateProcessButtonPressed extends CreateProcessEvent {
+  final CreateProcessSubmit submitData;
+
+  const CreateProcessButtonPressed({@required this.submitData})
+      : assert(submitData != null);
+
+  @override
+  List<Object> get props => [submitData];
+}
