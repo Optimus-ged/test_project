@@ -1,32 +1,31 @@
 import 'package:ackaton_manage/data/repository/data_repository.dart';
-import 'package:ackaton_manage/utils/setup_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'load_process_events.dart';
 import 'load_process_state.dart';
 
-class LoadMissionBloc extends Bloc<LoadMissionEvent, LoadMissionState> {
+class LoadProcessBloc extends Bloc<LoadProcessEvent, LoadProcessState> {
   // get _api => locator.get<DataRepository>();
-  LoadMissionBloc() : super(LoadMissionInitial());
+  LoadProcessBloc() : super(LoadProcessInitial());
 
   @override
-  Stream<LoadMissionState> mapEventToState(LoadMissionEvent event) async* {
-    if (event is LoadMissionsLoaded) yield* _mapLoadMissionToState(event);
+  Stream<LoadProcessState> mapEventToState(LoadProcessEvent event) async* {
+    if (event is LoadProcesssLoaded) yield* _mapLoadProcessToState(event);
   }
 
-  Stream<LoadMissionState> _mapLoadMissionToState(
-      LoadMissionEvent event) async* {
+  Stream<LoadProcessState> _mapLoadProcessToState(
+      LoadProcessEvent event) async* {
     try {
-      yield LoadMissionInProgress();
-      final missions = await dataRepository.getAllMissions();
-      if (missions.data != null) {
-        yield LoadMissionSuccess(missions: missions);
+      yield LoadProcessInProgress();
+      final processs = await dataRepository.getAllProcesss();
+      if (processs.data != null) {
+        yield LoadProcessSuccess(procResp: processs);
       } else {
-        yield LoadMissionFailure(message: 'erreur');
+        yield LoadProcessFailure(message: 'erreur');
       }
     } catch (error, stackTrace) {
-      yield LoadMissionFailure(message: "veuillez verifier votre connection");
+      yield LoadProcessFailure(message: "veuillez verifier votre connection");
       print(
-          'Missions.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
+          'Processs.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
       return;
     }
   }
