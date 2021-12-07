@@ -48,6 +48,13 @@ class _BuildStepperState extends State<BuildStepper> {
             ),
           ),
         ),
+        Container(
+          color: Colors.blue[50],
+          margin: EdgeInsets.only(top: 2),
+          padding: EdgeInsets.symmetric(vertical: 20),
+          alignment: Alignment.center,
+          child: Text('Ajouter un processus'),
+        )
       ],
     );
   }
