@@ -7,7 +7,6 @@ import 'package:ackaton_manage/ui/screens/participant_page.dart';
 import 'package:ackaton_manage/ui/widgets/stepper_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'add_affectation_page.dart';
 import 'tasks_page.dart';
 
 class MissionDetails extends StatefulWidget {

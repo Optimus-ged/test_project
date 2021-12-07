@@ -155,11 +155,15 @@ class ParticipantDialog extends StatelessWidget {
                                                         children: [
                                                           Icon(
                                                             Icons.topic_rounded,
-                                                            size: 15,
+                                                            size: 13,
                                                           ),
                                                           SizedBox(width: 5),
                                                           Text(
-                                                              '${e.projectTaskName}'),
+                                                            '${e.projectTaskName}',
+                                                            style: TextStyle(
+                                                              fontSize: 11,
+                                                            ),
+                                                          ),
                                                         ],
                                                       ),
                                                     ))
