@@ -1,4 +1,5 @@
 import 'package:ackaton_manage/models/mission/mission_response.dart';
+import 'package:ackaton_manage/ui/screens/add_process.dart';
 import 'package:flutter/material.dart';
 
 class BuildStepper extends StatefulWidget {
@@ -48,12 +49,26 @@ class _BuildStepperState extends State<BuildStepper> {
             ),
           ),
         ),
-        Container(
-          color: Colors.blue[50],
-          margin: EdgeInsets.only(top: 2),
-          padding: EdgeInsets.symmetric(vertical: 20),
-          alignment: Alignment.center,
-          child: Text('Ajouter un processus'),
+        GestureDetector(
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AddProcess(),
+            ),
+          ),
+          child: Container(
+            color: Colors.blue,
+            margin: EdgeInsets.only(top: 5),
+            padding: EdgeInsets.symmetric(vertical: 20),
+            alignment: Alignment.center,
+            child: Text(
+              'Ajouter un processus',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ),
         )
       ],
     );
