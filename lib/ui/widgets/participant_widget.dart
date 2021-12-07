@@ -51,6 +51,7 @@ class ParticipantDialog extends StatelessWidget {
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
                             alignment: Alignment.center,
@@ -71,7 +72,6 @@ class ParticipantDialog extends StatelessWidget {
                                 ]),
                             child: Text(
                               'participant',
-                              // '$heureDepart',
                               style: TextStyle(
                                 color: Colors.black.withOpacity(0.8),
                                 fontWeight: FontWeight.bold,
@@ -79,18 +79,20 @@ class ParticipantDialog extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 20),
-                          CircleAvatar(
-                            radius: 50,
-                            backgroundColor: Colors.blue[50],
-                            backgroundImage:
-                                AssetImage('assets/images/person.jpg'),
-                            // child: Icon(Icons.person),
+                          Center(
+                            child: CircleAvatar(
+                              radius: 50,
+                              backgroundColor: Colors.grey[50],
+                              backgroundImage:
+                                  AssetImage('assets/images/noAvatar.png'),
+                            ),
                           ),
                           ConstrainedView(
                             child: AnimatedContainer(
                               duration: Duration(milliseconds: 0),
                               padding: EdgeInsets.only(left: 30, top: 20),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     crossAxisAlignment:
@@ -100,7 +102,7 @@ class ParticipantDialog extends StatelessWidget {
                                       SizedBox(
                                         // width: 178,
                                         child: Text(
-                                          'name',
+                                          '${participant.memberName}',
                                           style: contentStyle(),
                                         ),
                                       )
@@ -111,7 +113,7 @@ class ParticipantDialog extends StatelessWidget {
                                       Text('Téléphone :  ',
                                           style: titleStyle()),
                                       Text(
-                                        'tel',
+                                        '${participant.telephone}',
                                         style: contentStyle(),
                                       )
                                     ],
@@ -124,37 +126,39 @@ class ParticipantDialog extends StatelessWidget {
                                       SizedBox(
                                         // width: 150,
                                         child: Text(
-                                          'mail',
+                                          '${participant.email}',
                                           style: contentStyle(),
                                         ),
                                       )
                                     ],
                                   ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Id Agent :  ', style: titleStyle()),
-                                      SizedBox(
-                                        // width: 150,
-                                        child: Text(
-                                          'id',
-                                          style: contentStyle(),
+                                  Container(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Taches :',
+                                          style: titleStyle(),
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Genre : ',
-                                        style: titleStyle(),
-                                      ),
-                                      Text(
-                                        'Homme',
-                                        style: contentStyle(),
-                                      )
-                                    ],
+                                        SingleChildScrollView(
+                                          child: Column(
+                                            children: participant.memberTask
+                                                .map((e) => Padding(
+                                                  padding: const EdgeInsets.only(left: 20),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Icon(Icons.topic_rounded, size: 15,),
+                                                      SizedBox(width: 5),
+                                                      Text('${e.projectTaskName}'),
+                                                    ],
+                                                  ),
+                                                ))
+                                                .toList(),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),

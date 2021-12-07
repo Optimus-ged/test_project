@@ -93,8 +93,8 @@ class _ParticipantPageState extends State<ParticipantPage> {
       builder: (context, state) {
         if (state is LoadMissionSuccess) {
           // Traitments
+          _participantWidgetList.clear();
           widget.mission.members.forEach((e) {
-            _participantWidgetList.clear();
             _participantWidgetList.add(
               _participantItem(e, MediaQuery.of(context).size),
             );
@@ -113,6 +113,7 @@ class _ParticipantPageState extends State<ParticipantPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Text('${widget.mission.members.length}'),
                   Expanded(
                     child: Container(
                       width: MediaQuery.of(context).size.width - 40,
@@ -164,10 +165,17 @@ class _ParticipantPageState extends State<ParticipantPage> {
               end: end,
             ),
             child: CircleAvatar(
+              backgroundColor: Colors.blue,
               radius: 30,
-              backgroundColor: Colors.blue[50],
-              backgroundImage: AssetImage('assets/images/person.jpg'),
-              // child: Icon(Icons.person),
+              child: Padding(
+                padding: const EdgeInsets.all(0.2),
+                child: CircleAvatar(
+                  foregroundColor: Colors.blue[50],
+                  radius: 30,
+                  backgroundColor: Colors.blue[50],
+                  backgroundImage: AssetImage('assets/images/noAvatar.png'),
+                ),
+              ),
             ),
           ),
           title: Column(

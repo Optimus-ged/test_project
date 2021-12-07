@@ -23,11 +23,12 @@ class _MissionDetailsState extends State<MissionDetails> {
 
   void _loadTasks() {
     if (widget.mission.members.length != 0) {
+      _allTasks.clear();
       widget.mission.members.forEach(
         (e) {
           if (e.memberTask.length != 0) {
             e.memberTask.forEach((e) {
-              _allTasks.clear();
+              
               _allTasks.add(e.projectTaskName);
             });
           }
