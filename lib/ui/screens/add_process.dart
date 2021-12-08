@@ -108,27 +108,6 @@ class _AddProcessState extends State<AddProcess> {
                                 ),
                               )
                               .toList(),
-                          // children: [
-
-                          //   _buildItem(
-                          //     context,
-                          //     title: 'qqq',
-                          //     number: '22',
-                          //     onTap: () {},
-                          //   ),
-                          //   _buildItem(
-                          //     context,
-                          //     title: 'qqq',
-                          //     number: '22',
-                          //     onTap: () {},
-                          //   ),
-                          //   _buildItem(
-                          //     context,
-                          //     title: 'qqq',
-                          //     number: '22',
-                          //     onTap: () {},
-                          //   ),
-                          // ],
                         ),
                       ),
                     ),

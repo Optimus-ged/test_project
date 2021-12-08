@@ -23,7 +23,6 @@ class _BuildButtonState extends State<BuildButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom: 0, left: 20, right: 20),
       alignment: Alignment.bottomCenter,
       child: Material(
         elevation: 4,
