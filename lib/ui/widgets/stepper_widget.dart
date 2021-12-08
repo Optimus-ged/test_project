@@ -17,7 +17,7 @@ class BuildStepper extends StatefulWidget {
 
 class _BuildStepperState extends State<BuildStepper> {
   int _currentStep = 0;
-  StepperType _stepperType = StepperType.vertical;
+  // StepperType _stepperType = StepperType.vertical;
 
   @override
   Widget build(BuildContext context) {

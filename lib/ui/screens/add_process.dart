@@ -137,26 +137,34 @@ class _AddProcessState extends State<AddProcess> {
             left: BorderSide(width: 4, color: Colors.blue[50]),
           ),
         ),
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              child: Text(
-                '$title',
-                style: TextStyle(
-                    // fontSize: 12,
-                    ),
-              ),
+              child: Text('$title'),
             ),
             Container(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                      width: 2,
+                      color: Colors.blue[50],
+                      style: BorderStyle.solid),
+              ),
+              padding: EdgeInsets.symmetric(
+                vertical: 2,
+                horizontal: 5,
+              ),
               child: Text(
-                '$number',
+                'Ouvrir',
                 style: TextStyle(
-                  // fontSize: 12,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                  color: Colors.blue[500],
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),
