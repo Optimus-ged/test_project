@@ -1,15 +1,18 @@
 class CreateProcessSubmit {
-  String projectId;
+  int id;
+  int projectId;
 
-  CreateProcessSubmit({this.projectId});
+  CreateProcessSubmit({this.id, this.projectId});
 
   CreateProcessSubmit.fromJson(Map<String, dynamic> json) {
-    projectId = json['projectId'];
+    id = json['id'];
+    projectId = json['project_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['projectId'] = this.projectId;
+    data['id'] = this.id;
+    data['project_id'] = this.projectId;
     return data;
   }
 }

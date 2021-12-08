@@ -1,11 +1,9 @@
 import 'package:ackaton_manage/data/repository/data_repository.dart';
-import 'package:ackaton_manage/utils/setup_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'mission_events.dart';
 import 'mission_state.dart';
 
 class LoadMissionBloc extends Bloc<LoadMissionEvent, LoadMissionState> {
-  // get _api => locator.get<DataRepository>();
   LoadMissionBloc() : super(LoadMissionInitial());
 
   @override

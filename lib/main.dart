@@ -1,5 +1,6 @@
 import 'package:ackaton_manage/bloc/create_task_bloc/create_task_bloc.dart';
 import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
+import 'package:ackaton_manage/bloc/process_bloc/load_process.dart/load_process_bloc.dart';
 import 'package:ackaton_manage/bloc/process_bloc/process_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,6 +38,9 @@ void main() async {
             ),
             BlocProvider<LoadMissionBloc>(
               create: (context) => LoadMissionBloc(),
+            ),
+            BlocProvider<LoadProcessBloc>(
+              create: (context) => LoadProcessBloc(),
             ),
           ],
           child: MyApp(),

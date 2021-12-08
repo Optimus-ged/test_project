@@ -56,7 +56,10 @@ class _BuildStepperState extends State<BuildStepper> {
             ),
           ),
           child: Container(
-            color: Colors.blue,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(2)
+            ),
             margin: EdgeInsets.only(top: 5),
             padding: EdgeInsets.symmetric(vertical: 20),
             alignment: Alignment.center,

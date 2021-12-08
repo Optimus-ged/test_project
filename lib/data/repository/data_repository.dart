@@ -51,7 +51,7 @@ class DataRepository {
 
   Future<LoadProcessResponse> getAllProcesss() async {
     final result = await _dio.get(
-      "/get_project_list",
+      "/get_process_list",
     );
     return LoadProcessResponse.fromJson(result.data);
   }
@@ -60,7 +60,7 @@ class DataRepository {
     CreateProcessSubmit submit,
   ) async {
     final result = await _dio.get(
-      "/get_project_list",
+      "/change_process_status?id=${submit.id}&project_id=${submit.projectId}",
     );
     return CreateProcessResponse.fromJson(result.data);
   }

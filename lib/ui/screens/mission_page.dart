@@ -1,6 +1,8 @@
 import 'package:ackaton_manage/bloc/mission_bloc/mission_bloc.dart';
 import 'package:ackaton_manage/bloc/mission_bloc/mission_events.dart';
 import 'package:ackaton_manage/bloc/mission_bloc/mission_state.dart';
+import 'package:ackaton_manage/bloc/process_bloc/load_process.dart/load_process_bloc.dart';
+import 'package:ackaton_manage/bloc/process_bloc/load_process.dart/load_process_events.dart';
 import 'package:ackaton_manage/constants/variable.dart';
 import 'package:ackaton_manage/models/mission/mission_response.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +27,10 @@ class _MissionPageState extends State<MissionPage> {
   void initState() {
     _loadMissionBloc = BlocProvider.of<LoadMissionBloc>(context)
       ..add(LoadMissionsLoaded());
+    BlocProvider.of<LoadProcessBloc>(context)
+      ..add(
+        LoadProcesssLoaded(),
+      );
     super.initState();
   }
 
@@ -127,8 +133,7 @@ class _MissionPageState extends State<MissionPage> {
                       Expanded(
                         child: TextField(
                           decoration: InputDecoration.collapsed(
-                            hintText:
-                                'rechercher...',
+                            hintText: 'rechercher...',
                           ),
                         ),
                       ),
